@@ -8,6 +8,7 @@ set :environment, :development
 set :cache_enabled, false
 set :public, ROOT + "/public"
 
+
 # Mount our Main class with a base url of /
 map "/" do
   run About

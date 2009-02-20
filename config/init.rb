@@ -12,6 +12,9 @@ require 'dm-is-nested_set'
 require 'dm-is-state_machine'
 require 'dm-is-remixable'
 require 'fileutils'
+require 'memcache'
+require 'digest/md5'
+
 
 # ==========================
 # = Database configuration =
