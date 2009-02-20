@@ -12,6 +12,7 @@ OptionParser.new do |opt|
 end
 
 libs =  " -r irb/completion"
+libs << " -r #{File.dirname( __FILE__ ) + '/../config/boot'}"
 
 if options[:debugger]
   begin
