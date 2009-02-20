@@ -3,6 +3,10 @@ class About < Application
   get '/' do
     cache( haml( :index ) )
   end
+  
+  get '/reset' do
+    expire_cache( '/' )
+  end
 end
 
 __END__

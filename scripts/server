@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
+puts "Run this from the command line to get output"
+puts "thin -p 4567 -R config/config.ru start"
 `thin -p 4567 -R ./scripts/../config/config.ru start`
 
