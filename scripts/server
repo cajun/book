@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+system( "thin",  "-R #{File.dirname( __FILE__ ) + '/..' }/config/config.ru", "start" )

@@ -16,7 +16,7 @@ module Caching
     return text 
   end 
 end 
-Sinatra::EventContext.send :include, Caching
+Sinatra::Default.send :include, Caching
 
 # Example
 # get '/' do 
