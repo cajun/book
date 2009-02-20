@@ -1,7 +1,7 @@
 class About < Application
   use_in_file_templates!
   get '/' do
-    haml :index
+    cache( haml( :index ) )
   end
 end
 

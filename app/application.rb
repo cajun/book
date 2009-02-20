@@ -8,6 +8,7 @@ __END__
 !!! 1.1
 %html
   %head
+    = page_cached_timestamp
   %title require 'cookbook'
     
   #body 
