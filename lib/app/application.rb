@@ -15,13 +15,17 @@ __END__
   %head
     %script{ :type => 'text/javascript', :src => '/javascripts/jquery-1.3.2.min.js' }
     = page_cached_timestamp
+
   %title require 'cookbook'
-  %a{ :href => '/' } Go Home!!!
-  %a{ :href => '/recipes/' } Check out the Recipes
+  
+  #header
+    %a{ :href => '/' } Go Home!!!
+    %a{ :href => '/recipes/' } Check out the Recipes
 
   
   #body 
     =yield
   
-  #version
-    == You are running Sinatra v#{Sinatra::VERSION}
+  #footer
+    #version
+      == You are running Sinatra v#{Sinatra::VERSION}

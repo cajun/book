@@ -1,9 +1,14 @@
-ROOT    = File.dirname(__FILE__) + "/.."
-CONFIG  = ROOT + "/config"
-DB      = ROOT + "/db"
-DATA    = ROOT + "/data"
-MODULES = ROOT + "/modules"
-SCRIPTS = ROOT + "/scripts"
-APP     = ROOT + "/app"
+unless defined?( ROOT )
+  ROOT    = File.dirname(__FILE__) + "/.."
+  CONFIG  = ROOT + "/config"
+  DB      = ROOT + "/db"
+  LIB     = ROOT + "/lib"
+  DATA    = ROOT + "/lib/models"
+  MODULES = ROOT + "/lib/modules"
+  APP     = ROOT + "/lib/app"
+  SCRIPTS = ROOT + "/scripts"
+  TEST    = ROOT + "/test"
+  UNITS   = ROOT + "/test/units"
 
-require CONFIG + '/init'
+  require CONFIG + '/init'
+end

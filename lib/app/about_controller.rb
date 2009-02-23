@@ -1,4 +1,4 @@
-class About < Application
+class AboutController < Application
   use_in_file_templates!
   get '/' do
     cache( haml( :index ) )
