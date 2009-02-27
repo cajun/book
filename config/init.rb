@@ -14,7 +14,7 @@ require 'dm-is-remixable'
 require 'fileutils'
 require 'memcache'
 require 'digest/md5'
-
+require 'resolv'
 
 # ==========================
 # = Database configuration =
