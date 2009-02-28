@@ -5,16 +5,17 @@ Feature: Recipe maintance
   
   Background:
     Given a new Recipe
-    And the recipe's name set to 'hamburger'
-    And the recipe's instructions set to 'always cook on a big green egg'
+    And the recipe's name is set to 'hamburger'
+    And the recipe's instructions is set to 'always cook on a big green egg'
+    And the recipe's user_id is set to '1'
     
   Scenario: A Recipe will have a name
     Given a valid recipe
-    When the recipe's name set to 'nothing'
+    When the recipe's name is set to nil
     Then recipe will not be valid
     
   Scenario: A Recipe will have instructions
     Given a valid recipe
-    When the recipe's instructions set to 'nothing'
+    When the recipe's instructions is set to nil
     Then recipe will not be valid
   

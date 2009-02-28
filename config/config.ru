@@ -1,6 +1,6 @@
 # To use with thin
 # thin start -p PORT -R config.ru
-require File.dirname( __FILE__ ) + "/../config/boot"
+require File.dirname( __FILE__ ) + "/../cook_book"
 
 # Make sure all migrations have been run
 DataMapper.auto_upgrade!
@@ -13,14 +13,4 @@ set :public, ROOT + "/public"
 
 
 # Mount our Main class with a base url of /
-map "/" do
-  run AboutController
-end
-
-map '/recipes' do
-  run RecipeController
-end
-
-map '/json/recipes' do
-  run RecipeJson
-end
+run Sinatra::Application

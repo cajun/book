@@ -1,5 +1,6 @@
-require File.dirname(__FILE__) + '/../../config/boot'
-require 'sinatra/test/bacon'
+require File.dirname(__FILE__) + '/../../cook_book'
+require 'spec/expectations'
+require 'spec/matchers'
 require 'ruby-debug'
 
 # DataMapper.logger.close
@@ -8,44 +9,21 @@ require 'ruby-debug'
 #DataObjects::Sqlite3.logger.close
 #DataObjects::Sqlite3.logger = DataObjects::Logger.new( "#{ROOT}/logs/test-db.log", :debug )
 
-# puts '** Running Migrations **'
-# DataMapper.auto_migrate!
-# puts %Q{
+puts '** Running Migrations **'
+DataMapper.auto_migrate!
+puts %Q{
 # # ==========================================================================
 # # = Now the database is ready we can start testing our super cool cookbook =
 # # ==========================================================================
-# }
+}
 
 
-module MetaTests
-  def succeed
-    lambda { |block|
-      block.should.not.raise Bacon::Error
-      true
-    }
-  end
-
-  def fail
-    lambda { |block|
-      block.should.raise Bacon::Error
-      true
-    }
-  end
-
-  def equal_string(x)
-    lambda { |s|
-      x == s.to_s
-    }
-  end
-  
-  def not_equal( x )
-    lambda { |s|
-      x != s
-    }
-  end
+# Webrat
+require 'webrat'
+Webrat.configure do |config|
+  config.mode = :sinatra
 end
 
-World do |world|
-  world.extend( MetaTests )
-  world
+World do
+  Webrat::SinatraSession.new
 end
