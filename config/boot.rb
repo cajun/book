@@ -3,7 +3,7 @@ unless defined?( ROOT )
   CONFIG    = ROOT + "/config"
   DB        = ROOT + "/db"
   LIB       = ROOT + "/lib"
-  DATA      = ROOT + "/lib/models"
+  MODELS    = ROOT + "/lib/models"
   MODULES   = ROOT + "/lib/modules"
   SCRIPT    = ROOT + "/script"
   HELPERS   = ROOT + "/helpers"

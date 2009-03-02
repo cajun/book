@@ -29,15 +29,15 @@ require CONFIG + '/database'
 # ===========
 # = Modules =
 # ===========
-Dir.glob( File.join( MODULES, '*.rb' ) ).each{ |file| require file }
+Dir.glob( File.join( MODULES, '*.rb' ) ).each{ |file| load file }
 
 # ========
 # = Data =
 # ========
-Dir.glob( File.join( DATA, '*.rb' ) ).each{ |file| require file }
+Dir.glob( File.join( MODELS, '*.rb' ) ).each{ |file| load file }
 
 # ===========
 # = Helpers =
 # ===========
 # NOTE: theses need to be loaded revery request
-Dir.glob( File.join( DATA, '*.rb' ) ).each{ |file| load file }
+Dir.glob( File.join( HELPERS, '*.rb' ) ).each{ |file| load file }

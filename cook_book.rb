@@ -3,20 +3,23 @@ require 'sinatra'
 
 require File.dirname( __FILE__ ) + "/config/boot"
 
+set :environment, :development
 
 get '/' do
   cache( haml( :index ) )
 end
 
-get '/recipes' do
+get '/recipes/?' do
+  @recipes = Recipe.all
   cache( haml( :recipes ) )
 end
 
-get '/recipes/new' do
+get '/recipes/new/?' do
   cache( haml( :recipes_new ) )
 end
 
-get '/recipes/(\d+)' do
+get '/recipes/:id' do
+  @recipe = Recipe.get( params[:id].to_i )
   cache( haml( :recipe_show ) )
 end
 
@@ -78,10 +81,18 @@ __END__
 @@ recipes
 
 .title
-  %content You ain't got no recipes!!!!
+  %content 
+    - if @recipes.empty? 
+      You ain't got no recipes!!!!
+    - if !@recipes.empty?
+      %ul
+        = partial :list, :collection => @recipes, :local => 'recipe'
 
 .links
   %a{ :href => "/recipes/new" } Go Here to create some
+
+@@ list
+%li == a{ :href => "/recipes/#{recipe.id}" } = recipe.name
 
 @@ recipes_new
 
@@ -99,7 +110,7 @@ __END__
 
   #to_be_announced photos, videos
 
-  %button{ :type => 'button' } Save it!
+  %input{ :type => 'submit', :value => 'Save it!' }
 
 @@ recipe_show
 
@@ -109,5 +120,5 @@ __END__
 #stuff
   %p = @recipe.instructions
   
-# yeah you just created a new recipe
+#comments yeah you just created a new recipe
 
