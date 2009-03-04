@@ -1,5 +1,5 @@
 # DataMapper.setup(:default, 'sqlite3::memory:')
-DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/development.db")
+DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db//development.db")
 
 
 configure :development do

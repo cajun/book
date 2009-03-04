@@ -16,11 +16,6 @@ require 'digest/md5'
 require 'resolv'
 
 
-# ===============
-# = Environmemt =
-# ===============
-require CONFIG + '/environment'
-
 # ==========================
 # = Database configuration =
 # ==========================

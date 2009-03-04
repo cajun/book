@@ -9,7 +9,7 @@ get '/' do
   cache( haml( :index ) )
 end
 
-get '/recipes/?' do
+get '/recipes/index' do
   @recipes = Recipe.all
   cache( haml( :recipes ) )
 end
@@ -24,6 +24,7 @@ get '/recipes/:id' do
 end
 
 post '/recipes/create' do
+  expire_cache( '/recipes/index' )
   # NOTE: this is just for now until we get users inplace
   params["recipe"].merge!( "user_id" => "1" )
   @recipe = Recipe.new( params["recipe"] )
@@ -46,11 +47,11 @@ __END__
     %script{ :type => 'text/javascript', :src => '/javascripts/jquery-1.3.2.min.js' }
     = page_cached_timestamp
 
-  %title require 'cookbook'
+    %title require 'cookbook'
   
   #header
     %a{ :href => '/' } Go Home!!!
-    %a{ :href => '/recipes/' } Check out the Recipes
+    %a{ :href => '/recipes/index' } Check out the Recipes
 
   
   #body 
@@ -86,13 +87,14 @@ __END__
       You ain't got no recipes!!!!
     - if !@recipes.empty?
       %ul
-        = partial :list, :collection => @recipes, :local => 'recipe'
+        = partial :list, :collection => @recipes
 
 .links
   %a{ :href => "/recipes/new" } Go Here to create some
 
 @@ list
-%li == a{ :href => "/recipes/#{recipe.id}" } = recipe.name
+%li
+  %a{ :href => "/recipes/#{list.id}" }= list.name
 
 @@ recipes_new
 
@@ -115,10 +117,10 @@ __END__
 @@ recipe_show
 
 #title
-  %h2 = @recipe.name
+  %h2= @recipe.name
   
 #stuff
-  %p = @recipe.instructions
+  %p= @recipe.instructions
   
 #comments yeah you just created a new recipe
 
