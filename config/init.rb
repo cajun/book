@@ -5,6 +5,7 @@ require 'rubygems'
 require 'sinatra'
 require 'fileutils'
 require 'couchrest'
+require 'resolv'
 #require 'dm-core'
 #require 'dm-validations'
 #require 'dm-timestamps'
@@ -14,7 +15,6 @@ require 'couchrest'
 #require 'dm-is-remixable'
 #require 'dm-aggregates'
 #require 'digest/md5'
-#require 'resolv'
 
 
 # ==========================

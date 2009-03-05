@@ -7,7 +7,7 @@ Feature: Recipe maintance
     Given a new Recipe
     And the recipe's name is set to 'hamburger'
     And the recipe's instructions is set to 'always cook on a big green egg'
-    And the recipe's user_id is set to '1'
+    And the recipe's author is set to 'cajun'
     
   Scenario: A Recipe will have a name
     Given a valid recipe

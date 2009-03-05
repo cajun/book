@@ -19,7 +19,7 @@ get '/recipes/new/?' do
 end
 
 get '/recipes/:id' do
-  @recipe = Recipe.get( params[:id].to_i )
+  @recipe = Recipe.get( params[:id] )
   cache( haml( :recipe_show ) )
 end
 

@@ -8,7 +8,7 @@ Feature: User maintance
     And the user's email is set to '<email>'
     And the user's login is set to '<login>'
     When the user's password is set to '<password>'
-    Then the password will be encrypted and have a length of 60
+    Then the user's password is set to '<password>'
     
     Examples:
       |email        |login|password   |

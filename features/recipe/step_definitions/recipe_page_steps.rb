@@ -1,5 +1,5 @@
 Given /^you click the button '(.+)' and create a new recipe$/ do |button_name|
-  count = Recipe.count
+  count = Recipe.all.size
   Given "you click the button '#{button_name}'"
-  Recipe.count.should == count + 1
+  Recipe.all.size.should == count + 1
 end

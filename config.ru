@@ -6,6 +6,7 @@ set :app_file, File.join(root_dir, 'cook_book.rb')
 set :run, false
 set :environment, :development
 set :cache_enabled, false
+set :public, root_dir + '/public'
 
 # Mount our Main class with a base url of /
 run Sinatra::Application

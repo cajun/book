@@ -1,23 +1,18 @@
+# Setting up the test couchdb
+
 require File.dirname(__FILE__) + '/../../cook_book'
 require 'spec/expectations'
 require 'spec/matchers'
 require 'ruby-debug'
 
-# DataMapper.logger.close
-# DataMapper::Logger.new( "#{ROOT}/logs/test.log", :debug )
+SERVER.default_database = 'couchrest-book-test'
+SERVER.default_database.recreate!
 
-#DataObjects::Sqlite3.logger.close
-#DataObjects::Sqlite3.logger = DataObjects::Logger.new( "#{ROOT}/logs/test-db.log", :debug )
+class Couch < CouchRest::ExtendedDocument
+  use_database SERVER.default_database
+end
 
-puts '** Running Migrations **'
-DataMapper.auto_migrate!
-puts %Q{
-# # ==========================================================================
-# # = Now the database is ready we can start testing our super cool cookbook =
-# # ==========================================================================
-}
-
-
+set :public, ROOT + '/public'
 # Webrat
 require 'webrat'
 Webrat.configure do |config|
