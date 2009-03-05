@@ -1,19 +1,8 @@
-class Recipe
-  include DataMapper::Resource
-  
-  property :id,           Serial
-  property :name,         String,   :nullable => false, :index => true
-  property :instructions, Text,     :nullable => false
-  property :photo,        String
-  property :video,        String
-  property :created_at,   DateTime
-  
-  is_nested_set
-  
-  remix n, :results
-  
-  has n, :ingredient_for_recipes
-  has n, :ingredient, :through => :ingredient_for_recipes
-  belongs_to :user
-  
+class Recipe < Couch
+  property :name
+  property :instructions
+  property :photo
+  property :video
+  property :author, :cast_as => 'User'
+  property :ingredients, :cast_as => [ 'Ingredient' ]
 end
