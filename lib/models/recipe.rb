@@ -6,6 +6,9 @@ class Recipe < Couch
   property :author, :cast_as => 'User'
   property :ingredients, :cast_as => [ 'Ingredient' ]
   
+  
+  view_by :ingredients
+  
   def valid?
     !name.nil? and !instructions.nil?
   end
