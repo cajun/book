@@ -13,3 +13,6 @@ of that recipe that you have done. Here are some of the features:
 * Auto discover recipes - almost done
 
 More to come soon....because Jeb is here!
+
+and by changes to show off rebase
+
