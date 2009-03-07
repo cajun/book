@@ -12,4 +12,4 @@ of that recipe that you have done. Here are some of the features:
 * Print recipe cards - almost done
 * Auto discover recipes - almost done
 
-More to come soon....
+More to come soon....because Jeb is here!
