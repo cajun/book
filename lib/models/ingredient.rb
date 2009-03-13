@@ -2,6 +2,5 @@ class Ingredient < Couch
   attr_accessor :casted_by
   
   property :name
-  property :amount
-  property :unit
+  property :measurements, :cast_as => ["Measurement"]
 end
