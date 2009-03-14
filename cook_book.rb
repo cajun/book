@@ -25,8 +25,6 @@ end
 
 post '/recipes/create' do
   expire_cache( '/recipes/index' )
-  # NOTE: this is just for now until we get users inplace
-  params["recipe"].merge!( "user_id" => "1" )
   @recipe = Recipe.new( params["recipe"] )
   if( @recipe.save )
     redirect "/recipes/#{@recipe.id}"

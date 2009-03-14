@@ -4,22 +4,32 @@ class Recipe < Couch
   property :photo
   property :video
   property :ingredients, :cast_as => [ 'Ingredient' ]
-  property :author, :cast_as => 'User'
+  property :results, :cast_as => [ 'Result' ]
+  property :chef, :cast_as => 'Chef'
   
   view_by :ingredients
+  
+  def initialize( args={} )
+    super( args )
+    self.ingredients =[] unless self.ingredients
+    self.results =[] unless self.results
+  end
   
   def valid?
     !name.nil? and !instructions.nil?
   end
 
-  def author=( user )
-    self["author"] = user.id
+  # ==============
+  # = Call Backs =
+  # ==============
+  save_callback :before, :save_assoications
+
+  def save_assoications
+    ingredients.each{ |i| i.save if i }
+    results.each{ |r| r.save if r }
+    chef.save if Chef === chef
   end
-  
-  def author
-    User.get( self["author"] ) if self["author"]
-  end
-  
+
   def lft=( left_recipe )
     self["lft"] = left_recipe.id
   end

@@ -1,5 +1,7 @@
 class Result < Couch
+  attr_accessor :casted_by
+
   property :body
   property :rank
-  property :user, :cast_as => 'User'
+  property :author, :cast_as => 'Chef'
 end
