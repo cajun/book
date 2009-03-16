@@ -6,6 +6,8 @@ class Chef < Couch
   property :login
   property :password
   
+  view_by :name
+  
   class << self
     def email_regex
       /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/

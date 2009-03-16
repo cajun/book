@@ -7,7 +7,14 @@ class Recipe < Couch
   property :results, :cast_as => [ 'Result' ]
   property :chef, :cast_as => 'Chef'
   
-  view_by :ingredients
+  view_by :ingredient_name, :map => "function(doc){
+    if ((doc['couchrest-type'] == 'Recipe') && doc['ingredients']) {
+       for( var ix in doc['ingredients'] ){
+        emit( doc['ingredients'][ix].name,1);  
+      }
+    }
+  }"
+  
   
   def initialize( args={} )
     super( args )
