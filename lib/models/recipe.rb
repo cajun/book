@@ -7,34 +7,47 @@ class Recipe < Couch
   property :results, :cast_as => [ 'Result' ]
   property :chef, :cast_as => 'Chef'
   
-  view_by :ingredient_name, :map => "function(doc){
+  view_by :ingredient_name, 
+  :map => "
+  function(doc){
     if ((doc['couchrest-type'] == 'Recipe') && doc['ingredients']) {
        for( var ix in doc['ingredients'] ){
-        emit( doc['ingredients'][ix].name,1);  
+        emit( doc['ingredients'][ix].name,{recipe_id: doc._id, count: 1});  
       }
     }
-  }"
+  }",
+  :reduce => "
+  function( key,values,reduce){
+    var count =0;
+    var rec = new Array();
+    var x;
+    for( x in values ){
+      count += values[x].count;
+      rec[x] = values[x].recipe_id;
+    }
+    return { total: count, recipe_id: rec }
+  }
+  "
   
   
   def initialize( args={} )
     super( args )
-    self.ingredients =[] unless self.ingredients
-    self.results =[] unless self.results
+    ingredients = [] if ingredients.nil?
+    results = [] if ingredients.nil?
   end
-  
+
   def valid?
     !name.nil? and !instructions.nil?
   end
-
-  # ==============
-  # = Call Backs =
-  # ==============
-  save_callback :before, :save_assoications
-
-  def save_assoications
-    ingredients.each{ |i| i.save if i }
-    results.each{ |r| r.save if r }
-    chef.save if Chef === chef
+  
+  def chef=( chef )
+    if Chef === chef
+      self["chef_id"] = chef.id
+    end
+  end
+  
+  def chef
+    Chef.get( self["chef_id"] ) if self["chef"]
   end
 
   def lft=( left_recipe )
