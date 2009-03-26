@@ -16,7 +16,7 @@ require 'resolv'
 #require 'dm-aggregates'
 #require 'digest/md5'
 
-
+$COUCHREST_DEBUG = true
 # ==========================
 # = Database configuration =
 # ==========================

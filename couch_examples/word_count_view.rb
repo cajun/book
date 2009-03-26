@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'couchrest'
- 
+$COUCHREST_DEBUG = true
 couch = CouchRest.new("http://127.0.0.1:5984")
 db = couch.database('word-count-example')
  
@@ -16,9 +16,9 @@ word_count = {
   }'
 }
  
-db.delete db.get("_design/word_count") rescue nil
+db.delete_doc db.get("_design/word_count") rescue nil
  
-db.save({
+db.save_doc({
   "_id" => "_design/word_count",
   :views => {
     :words => word_count

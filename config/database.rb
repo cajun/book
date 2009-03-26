@@ -9,3 +9,5 @@ class Couch < CouchRest::ExtendedDocument
     true
   end
 end
+
+$db = Couch.new.database

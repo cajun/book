@@ -7,33 +7,37 @@ class Recipe < Couch
   property :results, :cast_as => [ 'Result' ]
   property :chef, :cast_as => 'Chef'
   
-  view_by :ingredient_name, 
-  :map => "
-  function(doc){
-    if ((doc['couchrest-type'] == 'Recipe') && doc['ingredients']) {
-       for( var ix in doc['ingredients'] ){
-        emit( doc['ingredients'][ix].name,{recipe_id: doc._id, count: 1});  
+  # ========================
+  # = Setting up the views =
+  # ========================
+  view_by :name
+  view_by :ingredients, :map => 
+    "function(doc){
+      if ((doc['couchrest-type'] == 'Recipe') && doc['ingredients']) {
+        for( var ix in doc['ingredients'] ){
+          emit( doc['ingredients'][ix].name,{recipe_id: doc._id, count: 1});  
+        }
       }
     }
-  }",
-  :reduce => "
-  function( key,values,reduce){
-    var count =0;
-    var rec = new Array();
-    var x;
-    for( x in values ){
-      count += values[x].count;
-      rec[x] = values[x].recipe_id;
-    }
-    return { total: count, recipe_id: rec }
-  }
-  "
+  ",
+  :reduce => 
+    "function( key,values,reduce){
+      var count =0;
+      var rec = new Array();
+      var x;
+      for( x in values ){
+        count += values[x].count;
+        rec[x] = values[x].recipe_id;
+      }
+      return { total: count, recipe_id: rec }
+    }"
+  
   
   
   def initialize( args={} )
     super( args )
-    ingredients = [] if ingredients.nil?
-    results = [] if ingredients.nil?
+    self.ingredients = [] if self.ingredients.nil?
+    self.results = [] if self.results.nil?
   end
 
   def valid?

@@ -38,3 +38,6 @@ puts
 puts 'The url looks like this:'
 puts 'http://127.0.0.1:5984/word-count-example/_view/word_count/word?key=["flight","da-vinci"]'
 puts "\nTry dropping that in your browser..."
+
+
+http://localhost:5984/word-count-example/_design/blah/_view/word_id
