@@ -1,4 +1,8 @@
-Given /^the password will be encrypted and have a length of (\d+)$/ do |length|
-  @chef.password.length.should == length.to_i
+Given /^the chef's is authorized by '(.+)' and '(.+)'$/ do |name, password|
+  Chef.authenticate( name, password ).should_not == nil
+end
+
+Given /^the chef's is not authorized by '(.+)' and '(.+)'$/ do |name, password|
+  Chef.authenticate( name, password ).should == nil
 end
 

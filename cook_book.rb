@@ -1,3 +1,10 @@
+# 
+#  cook_book.rb
+#  book
+#  
+#  Created by Zac Kleinpeter on 2009-03-27.
+#  Copyright 2009 Cajun Country. All rights reserved.
+# 
 require 'rubygems'
 require 'sinatra'
 
@@ -5,31 +12,41 @@ require File.dirname( __FILE__ ) + "/config/boot"
 
 set :environment, :development
 
+# ===============
+# = About Pages =
+# ===============
 get '/' do
   cache( haml( :index ) )
 end
 
-get '/recipes/index' do
-  @recipes = Recipe.all
-  cache( haml( :recipes ) )
+# ================
+# = CRUD Pages =
+# ================
+get %r{/(\w+)/index} do |klass_name|
+  klass = English.proper_noun( klass_name ).constantize
+  instance_variable_set( "@#{klass_name.plural}", klass.all( :limit => 10 ) )
+  cache( haml( klass_name.plural.to_sym) )
 end
 
-get '/recipes/new/?' do
-  cache( haml( :recipes_new ) )
+get %r{/(\w+)/new} do |klass_name|
+  cache( haml( "#{klass_name}_new".to_sym ) )
 end
 
-get '/recipes/:id' do
-  @recipe = Recipe.get( params[:id] )
-  cache( haml( :recipe_show ) )
+get %r{/(\w+)/(\w+)} do |klass_name,id|
+  klass = English.proper_noun( klass_name ).constantize
+  instance_variable_set( "@#{klass_name}", klass.get( id ) )
+  cache( haml( "#{klass_name}_show".to_sym ) )
 end
 
-post '/recipes/create' do
-  expire_cache( '/recipes/index' )
-  @recipe = Recipe.new( params["recipe"] )
-  if( @recipe.save )
-    redirect "/recipes/#{@recipe.id}"
+post %r{/(\w+)/create} do |klass_name|
+  klass = English.proper_noun( klass_name ).constantize
+  expire_cache( "/#{klass_name}/index" )
+  instance_variable_set( "@#{klass_name}", klass.new( params[klass_name] ) )
+  var = instance_variable_get( "@#{klass_name}" )
+  if( var.save )
+    redirect "/#{klass_name}/#{var.id}"
   else
-    haml( :recipes_new )
+    haml( "#{klass_name}_new".to_sym )
   end
 end
 
@@ -49,7 +66,7 @@ __END__
   
   #header
     %a{ :href => '/' } Go Home!!!
-    %a{ :href => '/recipes/index' } Check out the Recipes
+    %a{ :href => '/recipe/index' } Check out the Recipes
 
   
   #body 
@@ -88,18 +105,18 @@ __END__
         = partial :list, :collection => @recipes
 
 .links
-  %a{ :href => "/recipes/new" } Go Here to create some
+  %a{ :href => "/recipe/new" } Go Here to create some
 
 @@ list
 %li
-  %a{ :href => "/recipes/#{list.id}" }= list.name
+  %a{ :href => "/recipe/#{list.id}" }= list.name
 
-@@ recipes_new
+@@ recipe_new
 
 #title
   %h2 Create your new recipe
 
-%form{ :action => '/recipes/create', :method => "post" }
+%form{ :action => '/recipe/create', :method => "post" }
   %div
     %label{ :for => 'recipe[name]' } Name
     %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
@@ -122,3 +139,10 @@ __END__
   
 #comments yeah you just created a new recipe
 
+@@ chef_new
+
+yo yo yo
+
+@@ chef_show
+
+i am showing you who you are

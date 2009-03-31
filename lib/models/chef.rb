@@ -1,14 +1,28 @@
+# 
+#  chef.rb
+#  book
+#  
+#  Created by Zac Kleinpeter on 2009-03-27.
+#  Copyright 2009 Cajun Country. All rights reserved.
+# 
 class Chef < Couch
   attr_accessor :casted_by
 
   property :email
-  property :name
+  property :first_name
+  property :last_name
   property :login
-  property :password
+  property :encrypted_password
   
-  view_by :name
+  view_by :email
+  view_by :login
   
   class << self
+    def authenticate( name, given_password )
+      chef = [ by_email( :key => name ), by_login( :key => name ) ].flatten.first
+      chef if( chef && chef.password == given_password )
+    end
+    
     def email_regex
       /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
     end
@@ -32,4 +46,11 @@ class Chef < Couch
         @mx.size > 0 ? true : false
   end
   
+  def password=( value )
+    self['encrypted_password'] = BCrypt::Password.create( value, :cost => 11 )
+  end
+  
+  def password
+    BCrypt::Password.new( self['encrypted_password'] )
+  end
 end

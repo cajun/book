@@ -8,7 +8,7 @@ Feature: Recipe maintance
     And the recipe's name is set to 'hamburger'
     And the recipe's instructions is set to 'always cook on a big green egg'
     And a new Chef
-    And the chef's name is set to 'cajun'
+    And the chef's login is set to 'cajun'
     And the recipe's chef is set to @chef
     
   Scenario: A Recipe will have a name

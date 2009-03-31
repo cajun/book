@@ -6,15 +6,11 @@ require 'sinatra'
 require 'fileutils'
 require 'couchrest'
 require 'resolv'
-#require 'dm-core'
-#require 'dm-validations'
-#require 'dm-timestamps'
-#require 'dm-types'
-#require 'dm-is-nested_set'
-#require 'dm-is-state_machine'
-#require 'dm-is-remixable'
-#require 'dm-aggregates'
-#require 'digest/md5'
+require 'bcrypt'
+require 'linguistics'
+
+Linguistics::use( :en, :installProxy => true )
+English = Linguistics::EN
 
 $COUCHREST_DEBUG = true
 # ==========================
@@ -37,3 +33,9 @@ Dir.glob( File.join( MODELS, '*.rb' ) ).each{ |file| load file }
 # ===========
 # NOTE: theses need to be loaded revery request
 Dir.glob( File.join( HELPERS, '*.rb' ) ).each{ |file| load file }
+
+# ===========
+# = Utils =
+# ===========
+# NOTE: theses need to be loaded revery request
+Dir.glob( File.join( UTILS, '*.rb' ) ).each{ |file| load file }

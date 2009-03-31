@@ -7,6 +7,7 @@ unless defined?( ROOT )
   MODULES   = ROOT + "/lib/modules"
   SCRIPT    = ROOT + "/script"
   HELPERS   = ROOT + "/helpers"
+  UTILS     = ROOT + '/lib/util'
 
   require CONFIG + '/init'
 end
