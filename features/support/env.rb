@@ -21,6 +21,7 @@ class Couch < CouchRest::ExtendedDocument
 end
 
 set :public, ROOT + '/public'
+set :views, ROOT + '/views'
 # Webrat
 require 'webrat'
 Webrat.configure do |config|
