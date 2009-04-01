@@ -14,10 +14,11 @@ helpers do
   def partial(template, options={})
     options.merge!(:layout => false)
     if collection = options.delete(:collection) then
+      local = template.to_s.split( '/' ).last.to_sym
       collection.inject([]) do |buffer, member|
         buffer << haml(template, options.merge(
                                   :layout => false, 
-                                  :locals => {template.to_sym => member}
+                                  :locals => { local => member}
                                 )
                      )
       end.join("\n")

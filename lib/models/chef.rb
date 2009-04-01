@@ -46,6 +46,10 @@ class Chef < Couch
         @mx.size > 0 ? true : false
   end
   
+  def name
+    "#{first_name} #{last_name}"
+  end
+  
   def password=( value )
     self['encrypted_password'] = BCrypt::Password.create( value, :cost => 11 )
   end

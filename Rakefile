@@ -21,3 +21,10 @@ end
 Cucumber::Rake::Task.new("features:rerun") do |t|
   t.cucumber_opts = "--guess --format rerun"
 end
+
+namespace :server do
+  desc 'restart the web server'
+  task :restart do
+    `touch tmp/restart.txt`
+  end
+end
