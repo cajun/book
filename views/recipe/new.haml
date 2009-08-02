@@ -2,20 +2,20 @@
   %h2 Create your new recipe
  
 %form{ :action => '/recipe/create', :enctype => 'multipart/form-data', :method => "post" }
-  %div
+  .full_width
     %label{ :for => 'recipe[name]' } Name
     %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
- 
-  %div
+
+  .full_width
     %label{ :for => 'recipe[instructions]' } Instuctions
-    %textarea{ :rows => 20, :cols => 80, :name => 'recipe[instructions]', :id => 'recipe[instructions]' }
+    %textarea{ :rows => 10, :name => 'recipe[instructions]', :id => 'recipe[instructions]' }
     
-  %div
+  .full_width
     %label{ :for => 'recipe[photo]' } Photos
     %input{ :name => 'recipe[photo]', :id => 'recipe[photo]', :type => 'file'  }
 
-  %div
+  .full_width
     %label{ :for => 'recipe[video]' } Viedos
     %input{ :name => 'recipe[video]', :id => 'recipe[video]', :type => 'file'  }
- 
+
   %input{ :type => 'submit', :value => 'Save it!' }

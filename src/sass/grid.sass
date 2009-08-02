@@ -16,36 +16,55 @@
   .container_16
     +grid-system(16)
 
-#page
-  +grid-container
+=book-fonts
   font-size: 28px
-
-#content
-  +grid(16,16)
-
+  
 body
   background-color: black
   background-repeat: repeat
   color: white
 
-.keyword
-  color: yellow
-
-.string
-  color: #33ff00
-  
-a
-  color: #3333cc
-a:hover
-  color: gray
+#page
+  +grid-container
+  +book-fonts
 
 #header-left
   +grid(9,16)
 
 #header-right
   +grid(7,16)
+  
+#content
+  +grid(16,16)
 
 #footer
   +grid(16,16)
   font-size: 18px
 
+/* syntax highlighting and other styles
+.keyword
+  color: yellow
+
+.string
+  color: #33ff00
+
+.full_width
+  +grid(16,16)
+  
+/* elements
+a
+  color: #3333cc
+a:hover
+  color: gray
+
+label
+  +grid(3,16)
+  +book-fonts
+  
+textarea
+  +grid(10,16)
+  +book-fonts
+  
+input
+  +grid(10,16)
+  +book-fonts
