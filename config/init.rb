@@ -8,6 +8,8 @@ require 'couchrest'
 require 'resolv'
 require 'bcrypt'
 require 'linguistics'
+require 'facets/string'
+require 'haml'
 
 Linguistics::use( :en, :installProxy => true )
 English = Linguistics::EN

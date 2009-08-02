@@ -8,13 +8,17 @@
 
 # Setting up the test couchdb
 
-require File.dirname(__FILE__) + '/../../cook_book'
-require 'spec/expectations'
-require 'spec/matchers'
+app_file = File.dirname(__FILE__) + '/../../cook_book.rb'
+require app_file
+require 'minitest/unit'
+require 'minitest/mock'
 require 'ruby-debug'
+require 'webrat'
 
+Sinatra::Application.app_file = app_file
 SERVER.default_database = 'couchrest-book-test'
-SERVER.default_database.recreate!
+SERVER.default_database.delete! rescue nil
+SERVER.default_database.create!
 
 class Couch < CouchRest::ExtendedDocument
   use_database SERVER.default_database
@@ -23,11 +27,14 @@ end
 set :public, ROOT + '/public'
 set :views, ROOT + '/views'
 # Webrat
-require 'webrat'
+
 Webrat.configure do |config|
   config.mode = :sinatra
 end
 
 World do
-  Webrat::SinatraSession.new
+  session = Webrat::SinatraSession.new
+  session.extend(Webrat::Matchers)
+  session.extend( MiniTest::Assertions )
+  session
 end

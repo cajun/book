@@ -6,13 +6,15 @@
 #  Copyright 2009 Cajun Country. All rights reserved.
 # 
 class Recipe < Couch
+  include HasChef
   property :name
   property :instructions
   property :photo
   property :video
+  property :state
   property :ingredients, :cast_as => [ 'Ingredient' ]
   property :results, :cast_as => [ 'Result' ]
-  property :chef, :cast_as => 'Chef'
+  property :commit, :cast_as => "Commit"
   
   # ========================
   # = Setting up the views =
@@ -38,43 +40,21 @@ class Recipe < Couch
       }
       return { total: count, recipe_id: rec }
     }"
-  
-  
-  
-  def initialize( args={} )
-    super( args )
-    self.ingredients = [] if self.ingredients.nil?
-    self.results = [] if self.results.nil?
-  end
 
+  
   def valid?
-    !name.nil? and !instructions.nil?
+    !name.nil? && !instructions.nil?
   end
   
-  def chef=( chef )
-    if Chef === chef
-      self["chef_id"] = chef.id
+  save_callback :before, :save_commit
+  
+  def save_commit
+    if commit?
+      commit.save
     end
   end
   
-  def chef
-    Chef.get( self["chef_id"] ) if self["chef"]
+  def commit?
+    false
   end
-
-  def lft=( left_recipe )
-    self["lft"] = left_recipe.id
-  end
-  
-  def lft
-    Recipe.get( self["lft"] ) if self["lft"]
-  end
-
-  def rht=( right_recipe )
-    self["rht"] = right_recipe.id
-  end
-  
-  def rht
-    Recipe.get( self["rht"] ) if self["rht"]
-  end
-  
 end

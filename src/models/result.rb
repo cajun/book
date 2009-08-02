@@ -6,9 +6,9 @@
 #  Copyright 2009 Cajun Country. All rights reserved.
 # 
 class Result < Couch
+  include HasChef
   attr_accessor :casted_by
 
   property :body
   property :rank
-  property :author, :cast_as => 'Chef'
 end

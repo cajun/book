@@ -8,7 +8,8 @@
   haml 
   rspec 
   ruby-debug 
-  webrat 
+  webrat
+  minitest
 ).each do |gem|
    puts "...Installing....#{gem}"
    system( "sudo gem install #{gem}")

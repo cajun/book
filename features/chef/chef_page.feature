@@ -11,9 +11,9 @@ Feature: Chef CRUD
     Then you post to '/chef/create' and create a new Chef
   
   Examples:
-    |email        |first_name|last_name|login |password   |
-    |foo@bar.com  |bubba     |smith    |cajun |supar cool |
-    |omg@w00t.com |woot      |bar      |budda |black sheep|
+    |email            |first_name|last_name|login |password   |
+    |ges7.ds@bar.com  |kreal     |p b      |cajun |supar cool |
+    |or1.foo@w00t.com |woot      |bar      |budda |black sheep|
     
   Scenario Outline: Create a new recipe by entering the fields
     Given you get to '/chef/new'
@@ -26,5 +26,5 @@ Feature: Chef CRUD
 
   Examples:
     |email        |first_name|last_name|login |password   |
-    |foo@bar.com  |bubba     |smith    |cajun |supar cool |
-    |omg@w00t.com |woot      |bar      |budda |black sheep|
+    |eew@bar.com  |black     |nurse    |cajun |supar cool |
+    |vww@w00t.com |jack      |slap     |budda |black sheep|

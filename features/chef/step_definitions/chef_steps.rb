@@ -1,8 +1,8 @@
 Given /^the chef's is authorized by '(.+)' and '(.+)'$/ do |name, password|
-  Chef.authenticate( name, password ).should_not == nil
+  assert( Chef.authenticate( name, password ) )
 end
 
 Given /^the chef's is not authorized by '(.+)' and '(.+)'$/ do |name, password|
-  Chef.authenticate( name, password ).should == nil
+  assert_nil( Chef.authenticate( name, password ) )
 end
 

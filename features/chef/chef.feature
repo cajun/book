@@ -6,14 +6,15 @@ Feature: Chef maintance
   
   Scenario Outline: Chef will have an encripted password
     Given a new Chef
-    When the chef's password is set to '<password>'
-    Then the chef's password is not equal to '<password>'
-    And the chef's encrypted_password is equal to '<password>'
+    And the chef's password is set to '<password>'
+    When the chef calls encrypt_password
+    Then the chef's encrypted_password is not decrypted to '<password> foo '
+    And the chef's encrypted_password is decrypted to '<password>'
   
     Examples:
       |email        |first_name|last_name|login |password   |
       |foo@bar.com  |bubba     |smith    |cajun |supar cool |
-      |omg@w00t.com |woot      |bar      |budda |black sheep|
+      |cow@w00t.com |woot      |bar      |budda |$6./ go@!0 |
       
   Scenario Outline: Chef will be authorized by login and password
     Given a new Chef
@@ -31,4 +32,6 @@ Feature: Chef maintance
       |email        |first_name|last_name|login |password   |
       |foo@bar.com  |bubba     |smith    |cajun |supar cool |
       |omg@w00t.com |woot      |bar      |budda |black sheep|
+      |omg@t--t.com |abhi      |dude     |kidd  |wtf        |
+      |cow@w00t.com |woot      |bar      |budda |6 go@0 |
     

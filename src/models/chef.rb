@@ -16,16 +16,25 @@ class Chef < Couch
   
   view_by :email
   view_by :login
+  view_by :last_name
+  
+  save_callback :before, :encrypt_password
+  create_callback :before, :encrypt_password
   
   class << self
     def authenticate( name, given_password )
       chef = [ by_email( :key => name ), by_login( :key => name ) ].flatten.first
-      chef if( chef && chef.password == given_password )
+      chef if( chef && chef.encrypted_password == given_password )
     end
     
     def email_regex
       /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
     end
+  end
+  
+  def initialize( args={} )
+    password = args.delete( :password ) unless args.nil?
+    super( args )
   end
   
   def valid_email
@@ -51,10 +60,20 @@ class Chef < Couch
   end
   
   def password=( value )
-    self['encrypted_password'] = BCrypt::Password.create( value, :cost => 11 )
+    @pass = value
   end
   
   def password
+    @pass
+  end
+  
+  def encrypt_password
+    if( password )
+      self['encrypted_password'] = BCrypt::Password.create( password, :cost => 11 )
+    end
+  end
+  
+  def encrypted_password
     BCrypt::Password.new( self['encrypted_password'] )
   end
 end

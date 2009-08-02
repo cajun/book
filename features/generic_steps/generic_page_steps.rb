@@ -10,7 +10,7 @@ Given /^you post to '(.+)' and create a new (\w+)$/ do |page, klass|
   klass = klass.constantize
   count = klass.all.size
   Given "you post to '#{page}'"
-  klass.all.size.should == count + 1
+  assert( count + 1, klass.all.size )
 end
 
 # =============================
