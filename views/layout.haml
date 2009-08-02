@@ -25,6 +25,8 @@
       #footer
         #version
           == You are running Sinatra v#{Sinatra::VERSION}
+        #last_deploy 
+          = `git log -n1 --pretty=email`
 
   %head
     %title require 'cookbook'

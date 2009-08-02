@@ -36,4 +36,4 @@ a:hover { color: gray; }
 
 #header-right { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 400px; }
 
-#footer { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; }
+#footer { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; font-size: 18px; }
