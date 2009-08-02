@@ -1,0 +1,29 @@
+# 
+#  has_chef.rb
+#  book
+#  
+#  Created by Zac Kleinpeter on 2009-04-06.
+#  Copyright 2009 Cajun Country. All rights reserved.
+# 
+module HasChef
+  module ClassMethods
+    
+  end
+  
+  module InstanceMethods
+    def chef=( chef )
+      if Chef === chef
+        self["chef_id"] = chef.id
+      end
+    end
+
+    def chef
+      Chef.get( self["chef_id"] ) if self["chef"]
+    end
+  end
+  
+  def self.included(receiver)
+    receiver.extend         ClassMethods
+    receiver.send :include, InstanceMethods
+  end
+end

@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+%w( 
+  sinatra 
+  jchris-couchrest 
+  bcrypt-ruby 
+  aslakhellesoy-cucumber 
+  dnssd 
+  haml 
+  rspec 
+  ruby-debug 
+  webrat
+  minitest
+).each do |gem|
+   puts "...Installing....#{gem}"
+   system( "sudo gem install #{gem}")
+end
+
+puts "...downloading gem from http://www.deveiate.org/code/Linguistics-1.0.5.gem"
+system( "wget http://www.deveiate.org/code/Linguistics-1.0.5.gem" )
+
+puts "...Installing...ruby linguistics"
+system( "sudo gem install Linguistics-1.0.5.gem" )
+
+puts "...cleaning up linguistics gem"
+system( 'rm Linguistics-1.0.5.gem' )
+
+puts "...downloading gem from http://www.deveiate.org/code/wordnet-0.0.5.gem"
+system( 'wget http://www.deveiate.org/code/wordnet-0.0.5.gem' )
+
+puts "...Installing...ruby wordnet"
+system( "sudo gem install wordnet-0.0.5.gem" )
+
+puts "...cleaning up wordnet gem"
+system( 'rm wordnet-0.0.5.gem' )
+
+puts "...now for couchdb..."
+
+puts "go here http://wiki.apache.org/couchdb/Installation"
+puts "You must install from source the latest version!!!!"
+

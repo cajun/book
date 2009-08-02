@@ -1,0 +1,32 @@
+!!! 1.1
+%html
+  %head
+    %link{:rel => "stylesheet", :href => "/stylesheets/grid.css", :type => "text/css", :media => "screen, projection"}
+    %link{:rel => "stylesheet", :href => "/stylesheets/text.css", :type => "text/css", :media => "screen, projection"}
+
+  = page_cached_timestamp
+  %body
+    #page
+      #header-left
+        %h1 
+          %span.keyword require 
+          %span.string 'cookbook'
+
+      #header-right
+        %span # =>
+        %a{ :href => '/' } Home
+        %a{ :href => '/recipe/index' } Recipe
+        %a{ :href => '/chef/index' } Chef
+
+
+      #content 
+        =yield
+
+      #footer
+        #version
+          == You are running Sinatra v#{Sinatra::VERSION}
+
+  %head
+    %title require 'cookbook'
+    %script{ :type => 'text/javascript', :src => '/javascripts/jquery-1.3.2.min.js' }
+  

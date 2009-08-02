@@ -1,10 +1,33 @@
-# DataMapper.setup(:default, 'sqlite3::memory:')
-DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db//development.db")
+SERVER = CouchRest.new
+SERVER.default_database = 'couchrest-book'
 
+class Couch < CouchRest::ExtendedDocument
+  use_database SERVER.default_database
+  timestamps!
 
-configure :development do
-  DataMapper::Logger.new( STDOUT, :debug )
-  DataObjects::Sqlite3.logger = DataObjects::Logger.new(STDOUT, :debug)
-  DataMapper.auto_migrate!
+  def valid?
+    true
+  end
+  
+  class << self
+    private
+    alias :default_fetch_view :fetch_view
+    
+    def fetch_view(db, view_name, opts, &block)
+      retryable = true
+      begin
+        default_fetch_view( db, view_name, opts, &block )
+      rescue RuntimeError => e
+        if retryable
+          save_design_doc_on(db)
+          retryable = false
+          retry
+        else
+          raise e
+        end
+      end
+    end
+  end
 end
 
+$db = Couch.new.database

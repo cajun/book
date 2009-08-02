@@ -1,0 +1,10 @@
+.info
+  %content 
+    - if @chefs.empty? 
+      You ain't got no chefs!!!!
+    - if !@chefs.empty?
+      %ul
+        = partial :'chef/list', :collection => @chefs
+
+.links
+  %a{ :href => "/chef/new" } Go Here to create some

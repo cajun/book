@@ -1,29 +1,40 @@
-require File.dirname(__FILE__) + '/../../cook_book'
-require 'spec/expectations'
-require 'spec/matchers'
+# 
+#  env.rb
+#  book
+#  
+#  Created by Zac Kleinpeter on 2009-03-27.
+#  Copyright 2009 Cajun Country. All rights reserved.
+# 
+
+# Setting up the test couchdb
+
+app_file = File.dirname(__FILE__) + '/../../cook_book.rb'
+require app_file
+require 'minitest/unit'
+require 'minitest/mock'
 require 'ruby-debug'
-
-# DataMapper.logger.close
-# DataMapper::Logger.new( "#{ROOT}/logs/test.log", :debug )
-
-#DataObjects::Sqlite3.logger.close
-#DataObjects::Sqlite3.logger = DataObjects::Logger.new( "#{ROOT}/logs/test-db.log", :debug )
-
-puts '** Running Migrations **'
-DataMapper.auto_migrate!
-puts %Q{
-# # ==========================================================================
-# # = Now the database is ready we can start testing our super cool cookbook =
-# # ==========================================================================
-}
-
-
-# Webrat
 require 'webrat'
+
+Sinatra::Application.app_file = app_file
+SERVER.default_database = 'couchrest-book-test'
+SERVER.default_database.delete! rescue nil
+SERVER.default_database.create!
+
+class Couch < CouchRest::ExtendedDocument
+  use_database SERVER.default_database
+end
+
+set :public, ROOT + '/public'
+set :views, ROOT + '/views'
+# Webrat
+
 Webrat.configure do |config|
   config.mode = :sinatra
 end
 
 World do
-  Webrat::SinatraSession.new
+  session = Webrat::SinatraSession.new
+  session.extend(Webrat::Matchers)
+  session.extend( MiniTest::Assertions )
+  session
 end

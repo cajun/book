@@ -1,3 +1,10 @@
+# 
+#  cook_book.rb
+#  book
+#  
+#  Created by Zac Kleinpeter on 2009-03-27.
+#  Copyright 2009 Cajun Country. All rights reserved.
+# 
 require 'rubygems'
 require 'sinatra'
 
@@ -5,122 +12,73 @@ require File.dirname( __FILE__ ) + "/config/boot"
 
 set :environment, :development
 
+# ===============
+# = About Pages =
+# ===============
 get '/' do
-  cache( haml( :index ) )
+  haml( :index )
 end
 
-get '/recipes/index' do
-  @recipes = Recipe.all
-  cache( haml( :recipes ) )
+# ==============
+# = Deploy Url =
+# ==============
+post '/deploy' do
+  `cd #{File.dirname( __FILE__ )}`
+  `git pull origin master`
+  `touch tmp/restart.txt`
 end
 
-get '/recipes/new/?' do
-  cache( haml( :recipes_new ) )
-end
-
-get '/recipes/:id' do
-  @recipe = Recipe.get( params[:id].to_i )
-  cache( haml( :recipe_show ) )
-end
-
-post '/recipes/create' do
-  expire_cache( '/recipes/index' )
-  # NOTE: this is just for now until we get users inplace
-  params["recipe"].merge!( "user_id" => "1" )
-  @recipe = Recipe.new( params["recipe"] )
-  if( @recipe.save )
-    redirect "/recipes/#{@recipe.id}"
+# ================
+# = CRUD Pages =
+# ================
+ 
+# index
+get %r{/(\w+)/index.?(\w*)} do |klass_name,extention|
+  klass = klass_name.modulize.constantize
+  instance_variable_set( "@#{klass_name.plural}", klass.all( :limit => 10 ) )
+  
+  case extention
+  when "json"
+    instance_variable_get( "@#{klass_name.plural}" ).to_json
   else
-    haml( :recipes_new )
+    haml( "#{klass_name}/index".to_sym )
   end
 end
 
-use_in_file_templates!
+# new
+get %r{/(\w+)/new} do |klass_name|
+  haml( "#{klass_name}/new".to_sym )
+end
 
-
-__END__
-
-@@ layout
-!!! 1.1
-%html
-  %head
-    %script{ :type => 'text/javascript', :src => '/javascripts/jquery-1.3.2.min.js' }
-    = page_cached_timestamp
-
-    %title require 'cookbook'
+# show
+get %r{/(\w+)/(\w+).?(\w*)} do |klass_name,id,extention|
+  klass = klass_name.modulize.constantize
+  instance_variable_set( "@#{klass_name}", klass.get( id ) )
   
-  #header
-    %a{ :href => '/' } Go Home!!!
-    %a{ :href => '/recipes/index' } Check out the Recipes
+  case extention
+  when "json"
+    instance_variable_get( "@#{klass_name}" ).to_json
+  else
+    haml( "#{klass_name}/show".to_sym )
+  end
+end
 
+# create
+post %r{/(\w+)/create.?(\w*)} do |klass_name,extention|
+  klass = klass_name.modulize.constantize
+  expire_cache( "/#{klass_name}/index" )
+  instance_variable_set( "@#{klass_name}", klass.new( params[klass_name] ) )
+  var = instance_variable_get( "@#{klass_name}" )
   
-  #body 
-    =yield
-  
-  #footer
-    #version
-      == You are running Sinatra v#{Sinatra::VERSION}
-
-@@ index
-.center
-  %h1 Welcome to require 'cookbook'
-
-  %p
-    I created this cookbook to refine the art of cooking.  Here you will be able to 
-    start with a basic recipe and then refine that recipe so that it can be improved.
-    While making a recipe better you will be able to see all the different variations 
-    of that recipe that you have done. Here are some of the features:
-
-    %ul
-      %li Rank ANYTHING
-      %li Add Results to ANYTHING
-      %li Have different brands per recipe
-      %li See the cost of each recipe - almost done
-      %li Print recipe cards - almost done
-      %li Auto discover recipes - almost done
-      
-@@ recipes
-
-.title
-  %content 
-    - if @recipes.empty? 
-      You ain't got no recipes!!!!
-    - if !@recipes.empty?
-      %ul
-        = partial :list, :collection => @recipes
-
-.links
-  %a{ :href => "/recipes/new" } Go Here to create some
-
-@@ list
-%li
-  %a{ :href => "/recipes/#{list.id}" }= list.name
-
-@@ recipes_new
-
-#title
-  %h2 Create your new recipe
-
-%form{ :action => '/recipes/create', :method => "post" }
-  %div
-    %label{ :for => 'recipe[name]' } Name
-    %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
-
-  %div
-    %label{ :for => 'recipe[instructions]' } Instuctions
-    %textarea{ :rows => 20, :cols => 80, :name => 'recipe[instructions]', :id => 'recipe[instructions]' }
-
-  #to_be_announced photos, videos
-
-  %input{ :type => 'submit', :value => 'Save it!' }
-
-@@ recipe_show
-
-#title
-  %h2= @recipe.name
-  
-#stuff
-  %p= @recipe.instructions
-  
-#comments yeah you just created a new recipe
-
+    
+  if( var.save )
+    redirect "/#{klass_name}/#{var.id}.#{extention}"
+  else
+    case extention
+    when "json"
+      { :errors => var.errors.to_json, :status => :error, :message => "Faild to save" }.to_json
+    else
+      "#{klass_name}/new".to_sym
+    end
+  end
+end

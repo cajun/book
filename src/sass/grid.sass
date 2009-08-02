@@ -1,0 +1,50 @@
+/*
+  960 Grid System ~ Core CSS.
+  Learn more ~ http://960.gs/
+  
+  Licensed under GPL and MIT.
+
+@import compass/utilities/general/reset.sass
+@import 960/grid.sass
+
++global-reset
+
+/*
+  .container_12
+    +grid-system(12)
+
+  .container_16
+    +grid-system(16)
+
+#page
+  +grid-container
+  font-size: 28px
+
+#content
+  +grid(16,16)
+
+body
+  background-color: black
+  background-repeat: repeat
+  color: white
+
+.keyword
+  color: yellow
+
+.string
+  color: #33ff00
+  
+a
+  color: #3333cc
+a:hover
+  color: gray
+
+#header-left
+  +grid(9,16)
+
+#header-right
+  +grid(7,16)
+
+#footer
+  +grid(16,16)
+

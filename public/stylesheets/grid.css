@@ -1,0 +1,39 @@
+/* 960 Grid System ~ Core CSS. Learn more ~ http://960.gs/ Licensed under GPL and MIT. */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
+
+*:focus { outline: 0; }
+
+body { line-height: 1em; color: black; background: #fff; }
+
+ol, ul { list-style: none; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table { border-collapse: separate; border-spacing: 0; vertical-align: middle; }
+
+caption, th, td { text-align: left; font-weight: normal; vertical-align: middle; }
+
+q, blockquote { quotes: "" ""; }
+q:before, q:after, blockquote:before, blockquote:after { content: ""; }
+
+img a { border: none; }
+
+/* .container_12   +grid-system(12) .container_16   +grid-system(16) */
+#page { margin-left: auto; margin-right: auto; width: 960px; font-size: 28px; }
+
+#content { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; }
+
+body { background-color: black; background-repeat: repeat; color: white; }
+
+.keyword { color: yellow; }
+
+.string { color: #33ff00; }
+
+a { color: #3333cc; }
+
+a:hover { color: gray; }
+
+#header-left { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 520px; }
+
+#header-right { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 400px; }
+
+#footer { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; }

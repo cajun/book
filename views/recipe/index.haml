@@ -1,0 +1,10 @@
+.info
+  %content 
+    - if @recipes.empty? 
+      You ain't got no recipes!!!!
+    - if !@recipes.empty?
+      %ul
+        = partial :'recipe/list', :collection => @recipes
+
+.links
+  %a{ :href => "/recipe/new" } Go Here to create some
