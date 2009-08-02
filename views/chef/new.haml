@@ -7,9 +7,9 @@
     %input{ :name => 'chef[login]', :id => 'chef[login]' }
           
   .full_width
-    %label{ :for => 'chef[password]' } Password
-    %input{ :name => 'chef[password]', :id => 'chef[password]' }
-          
+    %label{ :for => 'chef[email]' } Email
+    %input{ :name => 'chef[email]', :id => 'chef[email]' }
+
   .full_width
     %label{ :for => 'chef[first_name]' } First Name
     %input{ :name => 'chef[first_name]', :id => 'chef[fisrt_name]' }
@@ -17,9 +17,14 @@
   .full_width
     %label{ :for => 'chef[last_name]' } Last Name
     %input{ :name => 'chef[last_name]', :id => 'chef[last_name]' }
-          
-  .full_width
-    %label{ :for => 'chef[email]' } Email
-    %input{ :name => 'chef[email]', :id => 'chef[email]' }
 
-  %input{ :type => 'submit', :value => 'Save it!' }
+  .full_width
+    %label{ :for => 'chef[password]' } Password
+    %input{ :type => 'password', :name => 'chef[password]', :id => 'chef[password]' }
+
+  .full_width
+    %label{ :for => 'chef[confirm_password]' } Confirm Password
+    %input{ :type => 'password', :name => 'chef[confirm_password]', :id => 'chef[confirm_password]' }
+
+  .full_width
+    %input{ :type => 'submit', :value => 'Save it!' }

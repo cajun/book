@@ -26,9 +26,10 @@
         #version
           == You are running Sinatra v#{Sinatra::VERSION}
         #last_deploy 
+          %p Latest deploy information
           = `git log -n1 --pretty=email`
 
   %head
     %title require 'cookbook'
-    %script{ :type => 'text/javascript', :src => '/javascripts/jquery-1.3.2.min.js' }
+    %script{ :type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js' }
   

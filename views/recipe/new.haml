@@ -7,6 +7,11 @@
     %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
 
   .full_width
+    %label{ :for => 'recipe[name]' } Ingredient
+    %input{ :name => 'recipe[ingredients][0]', :id => 'recipe[ingredients][0]' }
+    %a{ :href => '', :id => 'link[ingredients][0]'  } Add
+    
+  .full_width
     %label{ :for => 'recipe[instructions]' } Instuctions
     %textarea{ :rows => 10, :name => 'recipe[instructions]', :id => 'recipe[instructions]' }
     
