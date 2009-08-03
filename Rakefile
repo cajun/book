@@ -1,25 +1,23 @@
 require 'rubygems'
 $:.unshift(File.dirname(__FILE__) + '/config/boot')
-require 'cucumber/rake/task'
 
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = "--guess --format pretty"
-end
+namespace( :cucumber ) do
+  task :features do
+    `cucumber --guess --format pretty features`
+  end
 
-Cucumber::Rake::Task.new("features:pretty") do |t|
-  t.cucumber_opts = "--guess --format pretty"
-end
+  task :profile do
+    `cucumber --guess --format profile features`
+  end
 
-Cucumber::Rake::Task.new("features:profile") do |t|
-  t.cucumber_opts = "--guess --format profile"
-end
-
-Cucumber::Rake::Task.new("features:progress") do |t|
-  t.cucumber_opts = "--guess --format progress"
-end
-
-Cucumber::Rake::Task.new("features:rerun") do |t|
-  t.cucumber_opts = "--guess --format rerun"
+  task :progress do
+    `cucumber --guess --format progress features`
+  end
+  
+  task :html_report do
+    `cucumber --guess --format progress --format html --out=features_report.html features`
+    `open features_report.html`
+  end
 end
 
 namespace :server do

@@ -3,23 +3,19 @@
   Learn more ~ http://960.gs/
   
   Licensed under GPL and MIT.
-
-@import compass/utilities/general/reset.sass
-@import 960/grid.sass
-
-+global-reset
-
-/*
   .container_12
     +grid-system(12)
 
   .container_16
     +grid-system(16)
 
-=book-fonts
-  font-size: 28px
-  font-family: monospace
-  
+@import compass/utilities/general/reset.sass
+@import 960/grid.sass
+@import macros.sass
+@import highlighting.sass
+
++global-reset
+
 body
   background-color: black
   color: white
@@ -34,37 +30,24 @@ body
 #header-right
   +grid(7,16)
   
-#content
+#content, .content
   +grid(16,16)
 
 #footer
   +grid(16,16)
   font-size: 18px
 
-/* syntax highlighting and other styles
-.keyword
-  color: yellow
-
-.string
-  color: #33ff00
-
-.full_width
-  +grid(16,16)
-  
 /* elements
 a
   color: #3333cc
 a:hover
   color: gray
 
+textarea, input, label
+  +book-fonts
+  
 label
   +grid(5,16)
-  +book-fonts
   
-textarea
+textarea, input
   +grid(10,16)
-  +book-fonts
-  
-input
-  +grid(10,16)
-  +book-fonts

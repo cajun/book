@@ -1,4 +1,9 @@
-/* 960 Grid System ~ Core CSS. Learn more ~ http://960.gs/ Licensed under GPL and MIT. */
+/* 960 Grid System ~ Core CSS. Learn more ~ http://960.gs/ Licensed under GPL and MIT. .container_12   +grid-system(12) .container_16   +grid-system(16) */
+/* syntax highlighting and other styles Making the editor effect */
+.keyword { color: yellow; }
+
+.string { color: #33ff00; }
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
 
 *:focus { outline: 0; }
@@ -17,7 +22,6 @@ q:before, q:after, blockquote:before, blockquote:after { content: ""; }
 
 img a { border: none; }
 
-/* .container_12   +grid-system(12) .container_16   +grid-system(16) */
 body { background-color: black; color: white; }
 
 #page { margin-left: auto; margin-right: auto; width: 960px; font-size: 28px; font-family: monospace; }
@@ -26,24 +30,17 @@ body { background-color: black; color: white; }
 
 #header-right { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 400px; }
 
-#content { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; }
+#content, .content { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; }
 
 #footer { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; font-size: 18px; }
-
-/* syntax highlighting and other styles */
-.keyword { color: yellow; }
-
-.string { color: #33ff00; }
-
-.full_width { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 940px; }
 
 /* elements */
 a { color: #3333cc; }
 
 a:hover { color: gray; }
 
-label { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 280px; font-size: 28px; font-family: monospace; }
+textarea, input, label { font-size: 28px; font-family: monospace; }
 
-textarea { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 580px; font-size: 28px; font-family: monospace; }
+label { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 280px; }
 
-input { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 580px; font-size: 28px; font-family: monospace; }
+textarea, input { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 580px; }

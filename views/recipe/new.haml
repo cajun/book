@@ -2,24 +2,24 @@
   %h2 Create your new recipe
  
 %form{ :action => '/recipe/create', :enctype => 'multipart/form-data', :method => "post" }
-  .full_width
+  .content
     %label{ :for => 'recipe[name]' } Name
     %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
 
-  .full_width
+  .content
     %label{ :for => 'recipe[name]' } Ingredient
     %input{ :name => 'recipe[ingredients][0]', :id => 'recipe[ingredients][0]' }
     %a{ :href => '', :id => 'link[ingredients][0]'  } Add
     
-  .full_width
+  .content
     %label{ :for => 'recipe[instructions]' } Instuctions
     %textarea{ :rows => 10, :name => 'recipe[instructions]', :id => 'recipe[instructions]' }
     
-  .full_width
+  .content
     %label{ :for => 'recipe[photo]' } Photos
     %input{ :name => 'recipe[photo]', :id => 'recipe[photo]', :type => 'file'  }
 
-  .full_width
+  .content
     %label{ :for => 'recipe[video]' } Videos
     %input{ :name => 'recipe[video]', :id => 'recipe[video]', :type => 'file'  }
 

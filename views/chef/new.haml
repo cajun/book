@@ -2,29 +2,29 @@
   %h2 Create your new chef
  
 %form{ :action => '/chef/create', :method => "post" }
-  .full_width
+  .content
     %label{ :for => 'chef[login]' } Login
     %input{ :name => 'chef[login]', :id => 'chef[login]' }
           
-  .full_width
+  .content
     %label{ :for => 'chef[email]' } Email
     %input{ :name => 'chef[email]', :id => 'chef[email]' }
 
-  .full_width
+  .content
     %label{ :for => 'chef[first_name]' } First Name
     %input{ :name => 'chef[first_name]', :id => 'chef[fisrt_name]' }
           
-  .full_width
+  .content
     %label{ :for => 'chef[last_name]' } Last Name
     %input{ :name => 'chef[last_name]', :id => 'chef[last_name]' }
 
-  .full_width
+  .content
     %label{ :for => 'chef[password]' } Password
     %input{ :type => 'password', :name => 'chef[password]', :id => 'chef[password]' }
 
-  .full_width
+  .content
     %label{ :for => 'chef[confirm_password]' } Confirm Password
     %input{ :type => 'password', :name => 'chef[confirm_password]', :id => 'chef[confirm_password]' }
 
-  .full_width
+  .content
     %input{ :type => 'submit', :value => 'Save it!' }
