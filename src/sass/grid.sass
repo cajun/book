@@ -10,44 +10,16 @@
     +grid-system(16)
 
 @import compass/utilities/general/reset.sass
+@import compass/utilities/lists.sass
+@import compass/utilities/links/hover_link.sass
 @import 960/grid.sass
-@import macros.sass
-@import highlighting.sass
 
 +global-reset
 
-body
-  background-color: black
-  color: white
+/* 
+  My Css
+@import mixins.sass
+@import ids.sass
+@import highlighting.sass
+@import elements.sass
 
-#page
-  +grid-container
-  +book-fonts
-
-#header-left
-  +grid(9,16)
-
-#header-right
-  +grid(7,16)
-  
-#content, .content
-  +grid(16,16)
-
-#footer
-  +grid(16,16)
-  font-size: 18px
-
-/* elements
-a
-  color: #3333cc
-a:hover
-  color: gray
-
-textarea, input, label
-  +book-fonts
-  
-label
-  +grid(5,16)
-  
-textarea, input
-  +grid(10,16)
