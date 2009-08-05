@@ -20,7 +20,8 @@ Feature: Recipe maintance
     Given a valid recipe
     When the recipe's instructions is set to nil
     Then recipe will not be valid
-    
+  
+  @results_ranking
   Scenario: A Recipe will have different many results
     Given a valid recipe
     And a new Result

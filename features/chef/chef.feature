@@ -4,7 +4,8 @@ Feature: Chef maintance
   I want to test that they have encrypted passwords
   And can login
   
-  Scenario Outline: Chef will have an encripted password
+  @auth
+  Scenario Outline: Chef will have an encrypted password
     Given a new Chef
     And the chef's password is set to '<password>'
     When the chef calls encrypt_password
@@ -15,7 +16,8 @@ Feature: Chef maintance
       |email        |first_name|last_name|login |password   |
       |foo@bar.com  |bubba     |smith    |cajun |supar cool |
       |cow@w00t.com |woot      |bar      |budda |$6./ go@!0 |
-      
+  
+  @auth
   Scenario Outline: Chef will be authorized by login and password
     Given a new Chef
     And the chef's email is set to '<email>'
@@ -33,5 +35,5 @@ Feature: Chef maintance
       |foo@bar.com  |bubba     |smith    |cajun |supar cool |
       |omg@w00t.com |woot      |bar      |budda |black sheep|
       |omg@t--t.com |abhi      |dude     |kidd  |wtf        |
-      |cow@w00t.com |woot      |bar      |budda |6 go@0 |
+      |cow@w00t.com |woot      |bar      |budda |6 go@0     |
     

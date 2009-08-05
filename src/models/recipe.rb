@@ -41,6 +41,11 @@ class Recipe < Couch
       return { total: count, recipe_id: rec }
     }"
 
+  def initialize( args={} )
+    self['results'] ||= []
+    self['ingredients'] ||= []
+    super( args )
+  end
   
   def valid?
     !name.nil? && !instructions.nil?

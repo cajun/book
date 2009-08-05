@@ -1,3 +1,4 @@
+@crud
 Feature: Chef CRUD
   Testing simple CRUD on web pages
   

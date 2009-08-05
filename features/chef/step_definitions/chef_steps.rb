@@ -1,5 +1,5 @@
 Given /^the chef's is authorized by '(.+)' and '(.+)'$/ do |name, password|
-  assert( Chef.authenticate( name, password ) )
+  assert( Chef.authenticate( name, password ), "failed to login for #{name} and #{password}" )
 end
 
 Given /^the chef's is not authorized by '(.+)' and '(.+)'$/ do |name, password|

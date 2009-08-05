@@ -1,14 +1,20 @@
 module GitInfo
   def email
-    `git log -n1 --pretty=email`
+    git_firt_log( "email" )
   end
   
   def deploy_date
-    `git log -n1 --pretty=format:%cd`
+    git_firt_log( "format:%cd" )
   end
   
   def deploy_message
-    `git log -n1 --pretty=format:%s`
+    git_firt_log( "format:%s" )
+  end
+  
+  private 
+  
+  def git_firt_log( format )
+    `git log -n1 --pretty=#{format}`
   end
 end
 

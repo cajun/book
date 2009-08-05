@@ -13,10 +13,18 @@ class Chef < Couch
   property :last_name
   property :login
   property :encrypted_password
+  property :login_count
+  property :failed_login_count
+  property :current_login_at
+  property :last_login_at
+  property :current_login_ip
+  property :last_login_ip
   
   view_by :email
   view_by :login
   view_by :last_name
+  # Make the following views
+  # view_by current_login_at + 10 min to see how many people are logged in
   
   save_callback :before, :encrypt_password
   create_callback :before, :encrypt_password
@@ -24,7 +32,13 @@ class Chef < Couch
   class << self
     def authenticate( name, given_password )
       chef = [ by_email( :key => name ), by_login( :key => name ) ].flatten.first
-      chef if( chef && chef.encrypted_password == given_password )
+      if( chef && chef.encrypted_password == given_password )
+        chef
+      elsif( chef )
+        chef.failed_login_count += 0
+        chef.save
+        nil
+      end
     end
     
     def email_regex
@@ -75,5 +89,22 @@ class Chef < Couch
   
   def encrypted_password
     BCrypt::Password.new( self['encrypted_password'] )
+  end
+  
+  def login_count
+    self['login_count'] || 0
+  end
+  
+  def failed_login_count
+    self['failed_login_count'] || 0
+  end
+  
+  def set_env( request )
+    login_count += 1
+    last_login_at = current_login_at
+    current_login_at = Time.now
+    last_login_ip = current_login_ip
+    current_login_ip = request.env["REMOTE_ADDR"]
+    save
   end
 end

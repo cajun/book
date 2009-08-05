@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html;charset=utf-8"/><title>Cucumber</title><style type="text/css">
+
+.cucumber {
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 0.7em;
+  background: white;
+  padding: 1em;
+}
+.cucumber h1, .cucumber h2, .cucumber h3, .cucumber h4, .cucumber ol, .cucumber li, .cucumber pre, .cucumber p {
+  font-size: 1em;
+  padding: 0px;
+  margin: 0px;
+}
+.cucumber div.feature {
+  border: 1px solid;
+  padding: 2px;
+  margin: 4px;
+}
+.cucumber div.feature div.background, .cucumber div.feature div.scenario, .cucumber div.feature p {
+  padding: 0em 0em 0em 1em;
+}
+.cucumber div.feature div.background div.examples, .cucumber div.feature div.scenario div.examples, .cucumber div.feature p div.examples {
+  padding: 0em 0em 0em 1em;
+}
+.cucumber .stats {
+  margin: 2em;
+}
+.cucumber .summary ul.features li {
+  display: inline;
+}
+.cucumber .backtrace {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1em;
+}
+.cucumber a {
+  text-decoration: none;
+  color: inherit;
+}
+.cucumber a:hover {
+  text-decoration: underline;
+}
+.cucumber a:visited {
+  font-weight: normal;
+}
+.cucumber a div.examples {
+  border: 1px solid;
+  padding: 2px;
+  margin: 4px;
+}
+.cucumber table {
+  border-collapse: collapse;
+}
+.cucumber table td, .cucumber table th {
+  font-size: 0.7em;
+  border: 1px solid #AAAAAA;
+}
+.cucumber table td.failed {
+  background: #FFC0CB;
+  color: #8B0000;
+}
+.cucumber table td.passed {
+  background: #98FB98;
+  color: #001111;
+}
+.cucumber table td.skipped {
+  background: #e0ffff;
+  color: #001111;
+}
+.cucumber table td.pending {
+  background: #FFFFE0;
+  color: #111100;
+}
+.cucumber table td.undefined {
+  background: #FFFFE0;
+  color: #111100;
+}
+.cucumber ol {
+  list-style: none;
+}
+.cucumber ol li {
+  margin: 0em 0em 0em 1em;
+  padding: 0em 0em 0em 0.2em;
+}
+.cucumber ol li span.param {
+  font-weight: bold;
+}
+.cucumber ol li.failed {
+  border-left: 5px solid #ff0000;
+  border-bottom: 1px solid #ff0000;
+  background: #ffc0cb;
+  color: #8b0000;
+}
+.cucumber ol li.failed span.param {
+  background: !failed_dark;
+}
+.cucumber ol li.passed {
+  border-left: 5px solid #00ff00;
+  border-bottom: 1px solid #00ff00;
+  background: #98fb98;
+  color: #001111;
+}
+.cucumber ol li.passed span.param {
+  background: #00ff00;
+}
+.cucumber ol li.skipped {
+  border-left: 5px solid #00ffff;
+  border-bottom: 1px solid #00ffff;
+  background: #e0ffff;
+  color: #001111;
+}
+.cucumber ol li.skipped span.param {
+  background: #00ffff;
+}
+.cucumber ol li.pending {
+  border-left: 5px solid #ff8000;
+  border-bottom: 1px solid #ff8000;
+  background: #ffff00;
+  color: #2a1b0a;
+}
+.cucumber ol li.pending span.param {
+  background: #ff8000;
+}
+.cucumber ol li.undefined {
+  border-left: 5px solid #ff8000;
+  border-bottom: 1px solid #ff8000;
+  background: #ffff00;
+  color: #2a1b0a;
+}
+.cucumber ol li.undefined span.param {
+  background: #ff8000;
+}
+</style></head><body><div class="cucumber"><div class="feature"><h2><span class="val">Feature: Chef maintance</span></h2><p class="narrative">In order to keep chef in check<br/>As valid chefs<br/>I want to test that they have encrypted passwords<br/>And can login<br/></p><div class="scenario outline"><span class="tag">@auth</span><h3><span class="keyword">Scenario Outline:</span> <span class="val">Chef will have an encrypted password</span></h3><ol><li class="step skipped" id="features_chef_chef_feature_9"><div><span class="keyword">Given</span> <span class="step val">a new Chef</span></div></li><li class="step skipped" id="features_chef_chef_feature_10"><div><span class="keyword">And</span> <span class="step val">the chef's password is set to '&lt;password&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_11"><div><span class="keyword">When</span> <span class="step val">the chef calls encrypt_password</span></div></li><li class="step skipped" id="features_chef_chef_feature_12"><div><span class="keyword">Then</span> <span class="step val">the chef's encrypted_password is not decrypted to '&lt;password&gt; foo '</span></div></li><li class="step skipped" id="features_chef_chef_feature_13"><div><span class="keyword">And</span> <span class="step val">the chef's encrypted_password is decrypted to '&lt;password&gt;'</span></div></li></ol><div class="examples"><h4><span class="keyword">Examples:</span> <span class="val"></span></h4><table><tr id="row_16"><th class="val skipped_param" id="row_16_0">email</th><th class="val skipped_param" id="row_16_1">first_name</th><th class="val skipped_param" id="row_16_2">last_name</th><th class="val skipped_param" id="row_16_3">login</th><th class="val skipped_param" id="row_16_4">password</th></tr><tr id="row_17"><td class="val" id="row_17_0">foo@bar.com</td><td class="val" id="row_17_1">bubba</td><td class="val" id="row_17_2">smith</td><td class="val" id="row_17_3">cajun</td><td class="val passed" id="row_17_4">supar cool</td></tr><tr id="row_18"><td class="val" id="row_18_0">cow@w00t.com</td><td class="val" id="row_18_1">woot</td><td class="val" id="row_18_2">bar</td><td class="val" id="row_18_3">budda</td><td class="val passed" id="row_18_4">$6./ go@!0</td></tr></table></div></div><div class="scenario outline"><span class="tag">@auth</span><h3><span class="keyword">Scenario Outline:</span> <span class="val">Chef will be authorized by login and password</span></h3><ol><li class="step skipped" id="features_chef_chef_feature_22"><div><span class="keyword">Given</span> <span class="step val">a new Chef</span></div></li><li class="step skipped" id="features_chef_chef_feature_23"><div><span class="keyword">And</span> <span class="step val">the chef's email is set to '&lt;email&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_24"><div><span class="keyword">And</span> <span class="step val">the chef's login is set to '&lt;login&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_25"><div><span class="keyword">And</span> <span class="step val">the chef's first_name is set to '&lt;first_name&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_26"><div><span class="keyword">And</span> <span class="step val">the chef's last_name is set to '&lt;last_name&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_27"><div><span class="keyword">And</span> <span class="step val">the chef's password is set to '&lt;password&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_28"><div><span class="keyword">When</span> <span class="step val">the chef is saved</span></div></li><li class="step skipped" id="features_chef_chef_feature_29"><div><span class="keyword">Then</span> <span class="step val">the chef's is authorized by '&lt;login&gt;' and '&lt;password&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_feature_30"><div><span class="keyword">And</span> <span class="step val">the chef's is not authorized by '&lt;login&gt;' and '&lt;password&gt; foo'</span></div></li><li class="step skipped" id="features_chef_chef_feature_31"><div><span class="keyword">And</span> <span class="step val">the chef's is not authorized by '&lt;login&gt; foo' and '&lt;password&gt;'</span></div></li></ol><div class="examples"><h4><span class="keyword">Examples:</span> <span class="val"></span></h4><table><tr id="row_34"><th class="val skipped_param" id="row_34_0">email</th><th class="val skipped_param" id="row_34_1">first_name</th><th class="val skipped_param" id="row_34_2">last_name</th><th class="val skipped_param" id="row_34_3">login</th><th class="val skipped_param" id="row_34_4">password</th></tr><tr id="row_35"><td class="val passed" id="row_35_0">foo@bar.com</td><td class="val passed" id="row_35_1">bubba</td><td class="val passed" id="row_35_2">smith</td><td class="val passed" id="row_35_3">cajun</td><td class="val passed" id="row_35_4">supar cool</td></tr><tr id="row_36"><td class="val passed" id="row_36_0">omg@w00t.com</td><td class="val passed" id="row_36_1">woot</td><td class="val passed" id="row_36_2">bar</td><td class="val passed" id="row_36_3">budda</td><td class="val passed" id="row_36_4">black sheep</td></tr><tr id="row_37"><td class="val passed" id="row_37_0">omg@t--t.com</td><td class="val passed" id="row_37_1">abhi</td><td class="val passed" id="row_37_2">dude</td><td class="val passed" id="row_37_3">kidd</td><td class="val passed" id="row_37_4">wtf</td></tr><tr id="row_38"><td class="val passed" id="row_38_0">cow@w00t.com</td><td class="val passed" id="row_38_1">woot</td><td class="val passed" id="row_38_2">bar</td><td class="val passed" id="row_38_3">budda</td><td class="val passed" id="row_38_4">6 go@0</td></tr></table></div></div></div><div class="feature"><span class="tag">@crud</span><h2><span class="val">Feature: Chef CRUD</span></h2><p class="narrative">Testing simple CRUD on web pages<br/></p><div class="scenario outline"><h3><span class="keyword">Scenario Outline:</span> <span class="val">Create a Chef with valid parameters</span></h3><ol><li class="step skipped" id="features_chef_chef_page_feature_6"><div><span class="keyword">Given</span> <span class="step val">you get to '/chef/new'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_7"><div><span class="keyword">When</span> <span class="step val">you set the parameter email to '&lt;email&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_8"><div><span class="keyword">And</span> <span class="step val">you set the parameter login to '&lt;login&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_9"><div><span class="keyword">And</span> <span class="step val">you set the parameter first_name to '&lt;first_name&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_10"><div><span class="keyword">And</span> <span class="step val">you set the parameter last_name to '&lt;last_name&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_11"><div><span class="keyword">And</span> <span class="step val">you set the parameter password to '&lt;password&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_12"><div><span class="keyword">Then</span> <span class="step val">you post to '/chef/create' and create a new Chef</span></div></li></ol><div class="examples"><h4><span class="keyword">Examples:</span> <span class="val"></span></h4><table><tr id="row_15"><th class="val skipped_param" id="row_15_0">email</th><th class="val skipped_param" id="row_15_1">first_name</th><th class="val skipped_param" id="row_15_2">last_name</th><th class="val skipped_param" id="row_15_3">login</th><th class="val skipped_param" id="row_15_4">password</th></tr><tr id="row_16"><td class="val passed" id="row_16_0">ges7.ds@bar.com</td><td class="val passed" id="row_16_1">kreal</td><td class="val passed" id="row_16_2">p b</td><td class="val passed" id="row_16_3">cajun</td><td class="val passed" id="row_16_4">supar cool</td></tr><tr id="row_17"><td class="val passed" id="row_17_0">or1.foo@w00t.com</td><td class="val passed" id="row_17_1">woot</td><td class="val passed" id="row_17_2">bar</td><td class="val passed" id="row_17_3">budda</td><td class="val passed" id="row_17_4">black sheep</td></tr></table></div></div><div class="scenario outline"><h3><span class="keyword">Scenario Outline:</span> <span class="val">Create a new recipe by entering the fields</span></h3><ol><li class="step skipped" id="features_chef_chef_page_feature_20"><div><span class="keyword">Given</span> <span class="step val">you get to '/chef/new'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_21"><div><span class="keyword">When</span> <span class="step val">you fill in chef[login] with '&lt;login&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_22"><div><span class="keyword">And</span> <span class="step val">you fill in chef[email] with '&lt;email&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_23"><div><span class="keyword">And</span> <span class="step val">you fill in chef[first_name] with '&lt;first_name&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_24"><div><span class="keyword">And</span> <span class="step val">you fill in chef[last_name] with '&lt;last_name&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_25"><div><span class="keyword">And</span> <span class="step val">you fill in chef[password] with '&lt;password&gt;'</span></div></li><li class="step skipped" id="features_chef_chef_page_feature_26"><div><span class="keyword">Then</span> <span class="step val">you click the button 'Save it!' and create a new Chef</span></div></li></ol><div class="examples"><h4><span class="keyword">Examples:</span> <span class="val"></span></h4><table><tr id="row_29"><th class="val skipped_param" id="row_29_0">email</th><th class="val skipped_param" id="row_29_1">first_name</th><th class="val skipped_param" id="row_29_2">last_name</th><th class="val skipped_param" id="row_29_3">login</th><th class="val skipped_param" id="row_29_4">password</th></tr><tr id="row_30"><td class="val passed" id="row_30_0">eew@bar.com</td><td class="val passed" id="row_30_1">black</td><td class="val passed" id="row_30_2">nurse</td><td class="val passed" id="row_30_3">cajun</td><td class="val passed" id="row_30_4">supar cool</td></tr><tr id="row_31"><td class="val passed" id="row_31_0">vww@w00t.com</td><td class="val passed" id="row_31_1">jack</td><td class="val passed" id="row_31_2">slap</td><td class="val passed" id="row_31_3">budda</td><td class="val passed" id="row_31_4">black sheep</td></tr></table></div></div></div><div class="feature"><h2><span class="val">Feature: Recipe maintance</span></h2><p class="narrative">In order to keep recipes in check<br/>As valid recipes<br/>I want to test that the validations work<br/></p><div class="background"><h3><span class="keyword">Background:</span> <span class="val"></span></h3><ol><li class="step passed" id="features_recipe_recipe_feature_7"><div><span class="keyword">Given</span> <span class="step val">a new <span class="param">Recipe</span></span></div></li><li class="step passed" id="features_recipe_recipe_feature_8"><div><span class="keyword">And</span> <span class="step val">the <span class="param">recipe</span>'s <span class="param">name</span> is set to '<span class="param">hamburger</span>'</span></div></li><li class="step passed" id="features_recipe_recipe_feature_9"><div><span class="keyword">And</span> <span class="step val">the <span class="param">recipe</span>'s <span class="param">instructions</span> is set to '<span class="param">always cook on a big green egg</span>'</span></div></li><li class="step passed" id="features_recipe_recipe_feature_10"><div><span class="keyword">And</span> <span class="step val">a new <span class="param">Chef</span></span></div></li><li class="step passed" id="features_recipe_recipe_feature_11"><div><span class="keyword">And</span> <span class="step val">the <span class="param">chef</span>'s <span class="param">login</span> is set to '<span class="param">cajun</span>'</span></div></li><li class="step passed" id="features_recipe_recipe_feature_12"><div><span class="keyword">And</span> <span class="step val">the <span class="param">recipe</span>'s <span class="param">chef</span> is set to @<span class="param">chef</span></span></div></li></ol></div><div class="scenario"><h3><span class="keyword">Scenario:</span> <span class="val">A Recipe will have a name</span></h3><ol><li class="step passed" id="features_recipe_recipe_feature_15"><div><span class="keyword">Given</span> <span class="step val">a valid <span class="param">recipe</span></span></div></li><li class="step passed" id="features_recipe_recipe_feature_16"><div><span class="keyword">When</span> <span class="step val">the <span class="param">recipe</span>'s <span class="param">name</span> is set to nil</span></div></li><li class="step passed" id="features_recipe_recipe_feature_17"><div><span class="keyword">Then</span> <span class="step val"><span class="param">recipe</span> will not be valid</span></div></li></ol></div><div class="scenario"><h3><span class="keyword">Scenario:</span> <span class="val">A Recipe will have instructions</span></h3><ol><li class="step passed" id="features_recipe_recipe_feature_20"><div><span class="keyword">Given</span> <span class="step val">a valid <span class="param">recipe</span></span></div></li><li class="step passed" id="features_recipe_recipe_feature_21"><div><span class="keyword">When</span> <span class="step val">the <span class="param">recipe</span>'s <span class="param">instructions</span> is set to nil</span></div></li><li class="step passed" id="features_recipe_recipe_feature_22"><div><span class="keyword">Then</span> <span class="step val"><span class="param">recipe</span> will not be valid</span></div></li></ol></div><div class="scenario"><span class="tag">@results_ranking</span><h3><span class="keyword">Scenario:</span> <span class="val">A Recipe will have different many results</span></h3><ol><li class="step passed" id="features_recipe_recipe_feature_26"><div><span class="keyword">Given</span> <span class="step val">a valid <span class="param">recipe</span></span></div></li><li class="step passed" id="features_recipe_recipe_feature_27"><div><span class="keyword">And</span> <span class="step val">a new <span class="param">Result</span></span></div></li><li class="step passed" id="features_recipe_recipe_feature_28"><div><span class="keyword">And</span> <span class="step val">the <span class="param">result</span>'s <span class="param">rank</span> is set to '<span class="param">10</span>'</span></div></li><li class="step passed" id="features_recipe_recipe_feature_29"><div><span class="keyword">And</span> <span class="step val">the <span class="param">result</span>'s <span class="param">body</span> is set to '<span class="param">sweet james this was good</span>'</span></div></li><li class="step passed" id="features_recipe_recipe_feature_30"><div><span class="keyword">When</span> <span class="step val">the <span class="param">result</span> is added to the <span class="param">recipe</span>'s <span class="param">results</span> <span class="param">2</span> times</span></div></li><li class="step passed" id="features_recipe_recipe_feature_31"><div><span class="keyword">Then</span> <span class="step val">the <span class="param">recipe</span>'s <span class="param">results</span> will have <span class="param">2</span> more</span></div></li><li class="step passed" id="features_recipe_recipe_feature_32"><div><span class="keyword">And</span> <span class="step val">save the <span class="param">recipe</span></span></div></li></ol></div></div><div class="feature"><span class="tag">@crud</span><h2><span class="val">Feature: Recipe web page</span></h2><p class="narrative">In order create new records<br/>And edit records<br/>And remove records ( we don't really gonna do this one )<br/></p><div class="scenario outline"><h3><span class="keyword">Scenario Outline:</span> <span class="val">Create a new recipe</span></h3><ol><li class="step skipped" id="features_recipe_recipe_page_feature_8"><div><span class="keyword">Given</span> <span class="step val">you get to '/recipe/new'</span></div></li><li class="step skipped" id="features_recipe_recipe_page_feature_9"><div><span class="keyword">When</span> <span class="step val">you set the parameter name to '&lt;name&gt;'</span></div></li><li class="step skipped" id="features_recipe_recipe_page_feature_10"><div><span class="keyword">And</span> <span class="step val">you set the parameter instructions to '&lt;instructions&gt;'</span></div></li><li class="step skipped" id="features_recipe_recipe_page_feature_11"><div><span class="keyword">Then</span> <span class="step val">you post to '/recipe/create' and create a new Recipe</span></div></li></ol><div class="examples"><h4><span class="keyword">Examples:</span> <span class="val"></span></h4><table><tr id="row_14"><th class="val skipped_param" id="row_14_0">name</th><th class="val skipped_param" id="row_14_1">instructions</th></tr><tr id="row_15"><td class="val passed" id="row_15_0">beer</td><td class="val passed" id="row_15_1">buy the kit and follow it</td></tr></table></div></div><div class="scenario outline"><h3><span class="keyword">Scenario Outline:</span> <span class="val">Create a new recipe by entering the fields</span></h3><ol><li class="step skipped" id="features_recipe_recipe_page_feature_18"><div><span class="keyword">Given</span> <span class="step val">you get to '/recipe/new'</span></div></li><li class="step skipped" id="features_recipe_recipe_page_feature_19"><div><span class="keyword">When</span> <span class="step val">you fill in recipe[name] with '&lt;name&gt;'</span></div></li><li class="step skipped" id="features_recipe_recipe_page_feature_20"><div><span class="keyword">And</span> <span class="step val">you fill in recipe[instructions] with '&lt;instructions&gt;'</span></div></li><li class="step skipped" id="features_recipe_recipe_page_feature_21"><div><span class="keyword">Then</span> <span class="step val">you click the button 'Save it!' and create a new Recipe</span></div></li></ol><div class="examples"><h4><span class="keyword">Examples:</span> <span class="val"></span></h4><table><tr id="row_24"><th class="val skipped_param" id="row_24_0">name</th><th class="val skipped_param" id="row_24_1">instructions</th></tr><tr id="row_25"><td class="val passed" id="row_25_0">beer</td><td class="val passed" id="row_25_1">buy the kit and follow it</td></tr></table></div></div></div><div class="duration">0m1.900s</div></div></body></html>

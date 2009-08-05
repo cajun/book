@@ -1,22 +1,32 @@
 require 'rubygems'
 $:.unshift(File.dirname(__FILE__) + '/config/boot')
 
-namespace( :cucumber ) do
-  task :features do
-    `cucumber --guess --format pretty features`
-  end
+require 'cucumber'
+require 'cucumber/rake/task'
 
-  task :profile do
-    `cucumber --guess --format profile features`
-  end
-
-  task :progress do
-    `cucumber --guess --format progress features`
+namespace( :test ) do
+  Cucumber::Rake::Task.new(:features) do |t|
+    t.cucumber_opts = "features --guess --format pretty"
   end
   
-  task :html_report do
-    `cucumber --guess --format progress --format html --out=features_report.html features`
-    `open features_report.html`
+  Cucumber::Rake::Task.new(:progress) do |t|
+    t.cucumber_opts = "features --guess --format progress"
+  end
+  
+  Cucumber::Rake::Task.new(:steps) do |t|
+    t.cucumber_opts = "features --guess --format steps"
+  end
+  
+  Cucumber::Rake::Task.new(:usage) do |t|
+    t.cucumber_opts = "features --guess --format usage"
+  end
+  
+  Cucumber::Rake::Task.new(:tag_cloud) do |t|
+    t.cucumber_opts = "features --guess --format progress --format tag_cloud --out=./tmp/tag_cloud.html"
+  end
+  
+  Cucumber::Rake::Task.new(:html) do |t|
+    t.cucumber_opts = "features --guess --format progress --format html --out=./public/features_report.html"
   end
 end
 

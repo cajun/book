@@ -1,3 +1,4 @@
+@crud
 Feature: Recipe web page
   In order create new records
   And edit records

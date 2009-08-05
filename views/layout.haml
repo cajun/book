@@ -15,8 +15,9 @@
       #header-right
         %span # =>
         %a{ :href => '/' } Home
-        %a{ :href => '/recipe/index' } Recipe
-        %a{ :href => '/chef/index' } Chef
+        %a{ :href => '/chef/new' } Register
+        %a{ :href => '/login' } Login
+        
 
 
       #content 
@@ -34,6 +35,8 @@
             %span.keyword Last Message
             %span =>
             %span.string= deploy_message
+          %p
+            %a{ :href => '/features_report.html' } Last Test Run
   %head
     %title require 'cookbook'
     %script{ :type => 'text/javascript', :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js' }
