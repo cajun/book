@@ -15,10 +15,14 @@ class Chef < Couch
   property :encrypted_password
   property :login_count
   property :failed_login_count
+  property :last_request_at
   property :current_login_at
   property :last_login_at
   property :current_login_ip
   property :last_login_ip
+  property :persistence_token
+  property :single_access_token
+  property :perishable_token
   
   view_by :email
   view_by :login

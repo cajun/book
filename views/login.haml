@@ -1,0 +1,11 @@
+%form{ :action => '/logic', :method => "post" }
+  .content
+    %label{ :for => 'chef[login]' } Login
+    %input{ :name => 'chef[login]', :id => 'chef[login]' }
+
+  .content
+    %label{ :for => 'chef[password]' } Password
+    %input{ :type => 'password', :name => 'chef[password]', :id => 'chef[password]' }
+
+  .content
+    %input{ :type => 'submit', :value => 'Login' }

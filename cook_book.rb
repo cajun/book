@@ -6,45 +6,37 @@
 #  Copyright 2009 Cajun Country. All rights reserved.
 # 
 require 'rubygems'
-require 'sinatra'
+require 'sinatra/base'
 
 require File.dirname( __FILE__ ) + "/config/boot"
-require MODULES + "/crud"
 
-# ===============
-# = About Pages =
-# ===============
-get '/' do
-  haml( :index )
-end
+class Book < Sinatra::Base
+  set :static, true
+  set :root, File.dirname(__FILE__)
+  set :views, Proc.new { File.join(root, "views") }
+  set :sessions, true
+  set :cache_enabled, false
+  
+  register Sinatra::PageCache
+  register Sinatra::Crud
+  register Sinatra::Login
+  
+  helpers Sinatra::Security
+  helpers Sinatra::HTMLHelpers
+  
+  # ===============
+  # = About Pages =
+  # ===============
+  get '/' do
+    haml( :index )
+  end
 
-# ==============
-# = Deploy Url =
-# ==============
-post '/deploy' do
-  `cd #{File.dirname( __FILE__ )}`
-  `git pull origin master`
-  `touch tmp/restart.txt`
-end
-
-get '/login' do
-  haml( '/login' )
-end
-
-post '/login' do
-  @chef = Chef.authenticate( params[:login], params[:password] )
-  if( @chef )
-    # logged in 
-    session[:chef_id] = @chef.id
-    @chef.set_env( request )
-    haml( "/" )
-  else
-    # failed
-    haml( "/" )
+  # ==============
+  # = Deploy Url =
+  # ==============
+  post '/deploy' do
+    `cd #{File.dirname( __FILE__ )}`
+    `git pull origin master`
+    `touch tmp/restart.txt`
   end
 end
-
-post '/logout' do
-end
-
-

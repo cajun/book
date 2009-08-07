@@ -41,3 +41,10 @@ Dir.glob( File.join( HELPERS, '*.rb' ) ).each{ |file| load file }
 # ===========
 # NOTE: theses need to be loaded revery request
 Dir.glob( File.join( UTILS, '*.rb' ) ).each{ |file| load file }
+
+# ===============
+# = Controllers =
+# ===============
+# NOTE: theses need to be loaded revery request
+class CookBook < Sinatra::Base; end
+Dir.glob( File.join( CONTROLLERS, '*.rb' ) ).each{ |file| load file }

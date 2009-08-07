@@ -12,6 +12,7 @@ app_file = File.dirname(__FILE__) + '/../../cook_book.rb'
 require app_file
 require 'minitest/unit'
 require 'minitest/mock'
+require 'rack/test'
 require 'ruby-debug'
 require 'webrat'
 
@@ -24,10 +25,13 @@ class Couch < CouchRest::ExtendedDocument
   use_database SERVER.default_database
 end
 
-set :public, ROOT + '/public'
-set :views, ROOT + '/views'
-# Webrat
+CookBook.set :root, Proc.new { File.join(ROOT, "views") }
+CookBook.set :public, Proc.new { File.join(ROOT, "views") }
+CookBook.set :views, Proc.new { File.join(ROOT, "views") }
+CookBook.set :environment, :test
 
+
+# Webrat
 Webrat.configure do |config|
   config.mode = :sinatra
 end
@@ -35,6 +39,7 @@ end
 World do
   session = Webrat::SinatraSession.new
   session.extend(Webrat::Matchers)
+  session.extend(Webrat::HaveTagMatcher)
   session.extend( MiniTest::Assertions )
   session
 end
