@@ -12,8 +12,9 @@ require File.dirname( __FILE__ ) + "/config/boot"
 
 class Book < Sinatra::Base
   set :static, true
-  set :root, File.dirname(__FILE__)
-  set :views, Proc.new { File.join(root, "views") }
+  set :app_file, __FILE__
+  #set :root, ROOT
+  #set :views, Proc.new { File.join(ROOT, "views") }
   set :sessions, true
   set :cache_enabled, false
   

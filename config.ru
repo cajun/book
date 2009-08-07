@@ -1,4 +1,4 @@
-require Dir.pwd + "/cook_book"
+require Dir.pwd + "/book"
 
 set :root, File.dirname(__FILE__)
 set :app_file, Proc.new { File.join(root, "cook_book.rb") }
