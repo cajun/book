@@ -18,7 +18,7 @@ module HasChef
     end
 
     def chef
-      Chef.get( self["chef_id"] ) if self["chef"]
+      Chef.get( self["chef_id"] ) if self["chef_id"]
     end
   end
   

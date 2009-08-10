@@ -36,7 +36,7 @@ Given /the (\w+) is added to the (\w+)'s (\w+)/ do |item, model, collection|
   var_model.send( collection ) << var_item
 end
 
-Given /^the (\w+) calls (\w+)$/ do |instance_var, method|
+Given /^the (\w+) calls (\w+[\?|!]?)$/ do |instance_var, method|
   instance_variable_get( "@#{instance_var}" ).send( "#{method}".to_sym )
 end
 

@@ -7,13 +7,14 @@
 # 
 class Recipe < Couch
   include HasChef
+  
   property :name
   property :instructions
   property :photo
   property :video
   property :state
-  property :ingredients, :cast_as => [ 'Ingredient' ]
-  property :results, :cast_as => [ 'Result' ]
+  property :ingredients, :cast_as => [ 'Ingredient' ], :default => []
+  property :results, :cast_as => [ 'Result' ], :default => []
   property :commit, :cast_as => "Commit"
   
   # ========================
@@ -40,18 +41,36 @@ class Recipe < Couch
       }
       return { total: count, recipe_id: rec }
     }"
-
-  def initialize( args={} )
-    self['results'] ||= []
-    self['ingredients'] ||= []
-    super( args )
+  
+  # =============
+  # = Callbacks =
+  # =============
+  save_callback :before, :save_commit
+  save_callback :before, :can_edit?
+  
+  # ===============
+  # = Validations =
+  # ===============
+  
+  # Determine who is allowed to edit this recipe
+  # The base rules will only allow the creator edit the recipe
+  # 
+  # @returns [Boolean] this is going to be a tuf one to figure out
+  def can_edit?
+    throw( :halt ) unless( (!Chef.current.nil? && Chef.current) == self.chef )
   end
   
+  # Check to determine if this recipe is valid
+  # Limited validations now for recipes
+  #
+  # @returns [Boolean] the succcessfullness of the save
   def valid?
     !name.nil? && !instructions.nil?
   end
   
-  save_callback :before, :save_commit
+  def commit?
+    false
+  end
   
   def save_commit
     if commit?
@@ -59,7 +78,4 @@ class Recipe < Couch
     end
   end
   
-  def commit?
-    false
-  end
 end

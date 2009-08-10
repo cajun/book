@@ -7,7 +7,7 @@ unless defined?( ROOT )
   CONTROLLERS = ROOT + "/src/controllers"
   MODULES     = ROOT + "/src/modules"
   SCRIPT      = ROOT + "/script"
-  HELPERS     = ROOT + "/helpers"
+  HELPERS     = ROOT + "/src/helpers"
   UTILS       = ROOT + '/src/util'
 
   require CONFIG + '/init'

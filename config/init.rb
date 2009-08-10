@@ -10,9 +10,11 @@ require 'bcrypt'
 require 'linguistics'
 require 'facets/string'
 require 'haml'
+require 'grit'
 
 Linguistics::use( :en, :installProxy => true )
 English = Linguistics::EN
+
 
 $COUCHREST_DEBUG = true
 # ==========================

@@ -1,21 +1,27 @@
 module GitInfo
-  def email
-    git_firt_log( "email" )
-  end
+  include Grit
   
+  # Last deploy date
   def deploy_date
-    git_firt_log( "format:%cd" )
+    last_commit.committed_date
   end
   
+  # Last Message for the deploy
   def deploy_message
-    git_firt_log( "format:%s" )
+    last_commit.message
   end
   
   private 
   
-  def git_firt_log( format )
-    `git log -n1 --pretty=#{format}`
-  end
+    # Last commit in the repo
+    def last_commit
+      @head ||= repo.commits( 'master', 1 ).first
+    end
+  
+    # The Repo
+    def repo
+      @repo ||= Repo.new( ROOT )
+    end
 end
 
 Sinatra::Base.send :include, GitInfo

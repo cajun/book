@@ -6,10 +6,11 @@
   aslakhellesoy-cucumber 
   dnssd 
   haml 
-  rspec 
   ruby-debug 
   webrat
   minitest
+  nakajima-rack-flash
+  pony
 ).each do |gem|
    puts "...Installing....#{gem}"
    system( "sudo gem install #{gem}")

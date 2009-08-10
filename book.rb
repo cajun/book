@@ -13,13 +13,13 @@ require File.dirname( __FILE__ ) + "/config/boot"
 class Book < Sinatra::Base
   set :static, true
   set :app_file, __FILE__
-  #set :root, ROOT
-  #set :views, Proc.new { File.join(ROOT, "views") }
+  set :views, Proc.new { File.join(ROOT, "src", "views") }
   set :sessions, true
   set :cache_enabled, false
   
   register Sinatra::PageCache
   register Sinatra::Crud
+  register Sinatra::ChefController
   register Sinatra::Login
   
   helpers Sinatra::Security
