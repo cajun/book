@@ -18,7 +18,7 @@ class Book < Sinatra::Base
   set :cache_enabled, false
   
   register Sinatra::PageCache
-  register Sinatra::Crud
+  register Sinatra::RecipeController
   register Sinatra::ChefController
   register Sinatra::Login
   

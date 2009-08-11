@@ -6,15 +6,19 @@
     %label{ :for => 'recipe[name]' } Name
     %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
 
+  %h3 Ingredients
   .content
+    %a{ :href => '', :id => 'link[ingredients][0]'  } Add Ingredient
     %label{ :for => 'recipe[name]' } Ingredient
     %input{ :name => 'recipe[ingredients][0]', :id => 'recipe[ingredients][0]' }
-    %a{ :href => '', :id => 'link[ingredients][0]'  } Add
     
+  %h3 Sections
   .content
-    %label{ :for => 'recipe[instructions]' } Instuctions
-    %textarea{ :rows => 10, :name => 'recipe[instructions]', :id => 'recipe[instructions]' }
+    %a{ :href => '', :id => 'link[sections][0]'  } Add Section
+    %label{ :for => 'recipe[sections][0]' } Header
+    %input{ :rows => 10, :name => 'recipe[sections][0][header]', :id => 'recipe[sections][0][header]' }
     
+  %h3 Media
   .content
     %label{ :for => 'recipe[photo]' } Photos
     %input{ :name => 'recipe[photo]', :id => 'recipe[photo]', :type => 'file'  }

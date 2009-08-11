@@ -7,41 +7,40 @@ module Sinatra
 
       # index
       app.get %r{/chef/index.?(\w*)} do |extention|
-        klass = klass_name.modulize.constantize
         @chefs = Chef.all( :limit => 10 )
         
         case extention
         when "json"
           @chefs.to_json
         else
-          haml( "#{klass_name}/index".to_sym )
+          haml( "chef/index".to_sym )
         end
       end
 
       # new
-      app.get %r{/chef/new} do |klass_name|
+      app.get %r{/chef/new} do
         haml( "chef/new".to_sym )
       end
 
       # show
       app.get %r{/chef/(\w+).?(\w*)} do |id,extention|
-        @chefs = Chef.get( id )
+        @chef = Chef.get( id )
 
         case extention
         when "json"
-          @chefs.to_json
+          @chef.to_json
         else
           haml( "chef/show".to_sym )
         end
       end
 
       # create
-      app.post %r{/chef/create.?(\w*)} do |klass_name,extention|
+      app.post %r{/chef/create.?(\w*)} do |extention|
         expire_cache( "/chef/index" )
-        @chef = Chef.new( params[klass_name] )
+        @chef = Chef.new( params["chef"] )
         
         if( @chef.save )
-          redirect "/chef/#{var.id}.#{extention}"
+          redirect "/chef/#{@chef.id}.#{extention}"
         else
           case extention
           when "json"

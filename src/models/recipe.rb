@@ -9,7 +9,7 @@ class Recipe < Couch
   include HasChef
   
   property :name
-  property :instructions
+  property :sections, :cast_as => [ 'Section' ], :default => []
   property :photo
   property :video
   property :state
@@ -49,6 +49,47 @@ class Recipe < Couch
   save_callback :before, :can_edit?
   
   # ===============
+  # = Initilizers =
+  # ===============
+  def initialize( args={} )
+    para_sections = args.delete( 'sections' )
+    para_ingredients = args.delete( 'sections' )
+    
+    super( args )
+    
+    sections_from_params( para_sections )
+    ingredients_from_params( para_ingredients )
+  end
+  
+  def sections_from_params( params )
+    return unless params
+    params.each do |index, section_hash|
+      next if section_hash.nil?
+      result = detect_section( section_hash['header'] )
+      if( result )
+        result.text = section_hash['text']
+      else
+        sections << Section.new( section_hash )
+      end
+    end
+  end
+  private( :sections_from_params )
+  
+  def ingredients_from_params( params )
+    return unless params
+    params.each do |index, ingredient_hash|
+      next if ingredient_hash.nil?
+      result = detect_ingredients( ingredient_hash['name'] )
+      if( result )
+        result.amount = ingredient_hash['amount']
+        result.unit = ingredient_hash['unit']
+      else
+        ingredients << Ingredient.new( ingredient_hash )
+      end
+    end
+  end
+  private( :sections_from_params )
+  # ===============
   # = Validations =
   # ===============
   
@@ -57,15 +98,15 @@ class Recipe < Couch
   # 
   # @returns [Boolean] this is going to be a tuf one to figure out
   def can_edit?
-    throw( :halt ) unless( (!Chef.current.nil? && Chef.current) == self.chef )
+    true #(!Chef.current.nil? && Chef.current) == self.chef
   end
-  
+
   # Check to determine if this recipe is valid
   # Limited validations now for recipes
   #
   # @returns [Boolean] the succcessfullness of the save
   def valid?
-    !name.nil? && !instructions.nil?
+    !name.nil?
   end
   
   def commit?
@@ -78,4 +119,29 @@ class Recipe < Couch
     end
   end
   
+  # =========
+  # = Utils =
+  # =========
+  def detect_section( section_header )
+    sections.detect{ |section| section.header == section_header } 
+  end
+  
+  def detect_ingredients( name )
+    ingredients.detect{ |ingredient| ingredient.name == name } 
+  end
+  
+  def instructions=( text )
+    instructions.text = text
+  end
+  
+  def instructions
+    instr = detect_ingredients( 'Instructions' )
+    if( instr )
+      instr
+    else
+      instr = Section.new( :header => 'Instructions' )
+      sections << instr
+      instr
+    end
+  end
 end

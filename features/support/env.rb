@@ -15,6 +15,7 @@ require 'minitest/mock'
 require 'rack/test'
 require 'ruby-debug'
 require 'webrat/sinatra'
+require 'rr'
 
 SERVER.default_database = 'couchrest-book-test'
 SERVER.default_database.delete! rescue nil
@@ -40,5 +41,6 @@ World do
   session.extend(Webrat::Matchers)
   session.extend(Webrat::HaveTagMatcher)
   session.extend( MiniTest::Assertions )
+  session.extend( RR::Adapters::RRMethods )
   session
 end

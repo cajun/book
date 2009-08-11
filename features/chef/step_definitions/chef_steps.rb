@@ -6,3 +6,8 @@ Given /^the chef's is not authorized by '(.+)' and '(.+)'$/ do |name, password|
   assert_nil( Chef.authenticate( name, password ) )
 end
 
+Given /^a current Chef of '(.+)'$/ do |name|
+  c = Chef.new( :login => name )
+  c.save
+  stub( Chef ).current { c }
+end

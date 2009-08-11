@@ -1,7 +1,16 @@
 .info
   %h2= @recipe.name
+  %h3= @recipe.chef
   
-#stuff
-  %p= @recipe.instructions
-  
+- @recipe.ingredients.each do |ingredient|
+  .ingredient
+    %span ingredient.name
+    %span ingredient.amount
+    %span ingredient.unit
+    
+- @recipe.sections.each do |section|
+  %h2= section.header
+  %p= section.text
+
+
 #comments yeah you just created a new recipe
