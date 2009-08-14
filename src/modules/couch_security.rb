@@ -41,6 +41,7 @@ module CouchSecurity
     # 
     # @param [Request] request request object from the controller
     def set_env_success( request )
+      login_count ||= 0
       login_count += 1
       last_login_at = current_login_at
       current_login_at = Time.now
@@ -50,7 +51,8 @@ module CouchSecurity
     end
     
     def set_env_failure( request = nil )
-      failed_login_count += 0
+      failed_login_count ||= 0
+      failed_login_count += 1
       save
     end
     

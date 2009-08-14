@@ -1,6 +1,9 @@
 SERVER = CouchRest.new
 SERVER.default_database = 'couchrest-book'
 
+couch = CouchRest.new
+LOG_DB = couch.database!('couchrest-logger')
+
 class Couch < CouchRest::ExtendedDocument
   use_database SERVER.default_database
   timestamps!

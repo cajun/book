@@ -9,6 +9,7 @@ unless defined?( ROOT )
   SCRIPT      = ROOT + "/script"
   HELPERS     = ROOT + "/src/helpers"
   UTILS       = ROOT + '/src/util'
+  MIDDLEWARE  = ROOT + '/src/middleware/rack/couchdb'
 
   require CONFIG + '/init'
 end

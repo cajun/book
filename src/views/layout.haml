@@ -15,8 +15,12 @@
       #header-right
         %span # =>
         %a{ :href => '/' } Home
-        %a{ :href => '/chef/new' } Register
-        %a{ :href => '/login' } Login
+        
+        - if( Chef.current )
+          %h2== Welcome #{Chef.current}
+        -else
+          %a{ :href => '/chef/new' } Register
+          %a{ :href => '/login' } Login
         
 
 

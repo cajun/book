@@ -11,6 +11,8 @@ require 'linguistics'
 require 'facets/string'
 require 'haml'
 require 'grit'
+require 'rack'
+require 'rack/contrib'
 
 Linguistics::use( :en, :installProxy => true )
 English = Linguistics::EN
@@ -49,3 +51,9 @@ Dir.glob( File.join( UTILS, '*.rb' ) ).each{ |file| load file }
 # ===============
 # NOTE: theses need to be loaded revery request
 Dir.glob( File.join( CONTROLLERS, '*.rb' ) ).each{ |file| load file }
+
+# ===============
+# = Middleware =
+# ===============
+Dir.glob( File.join( MIDDLEWARE, '*.rb' ) ).each{ |file| load file }
+

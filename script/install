@@ -9,8 +9,8 @@
   ruby-debug 
   webrat
   minitest
-  nakajima-rack-flash
   pony
+  rack-rack-contrib
 ).each do |gem|
    puts "...Installing....#{gem}"
    system( "sudo gem install #{gem}")

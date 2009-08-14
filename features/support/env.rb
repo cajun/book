@@ -25,19 +25,17 @@ class Couch < CouchRest::ExtendedDocument
   use_database SERVER.default_database
 end
 
-# This is to make the app play with Webrat
-class Book
-  def self.app
-    self
-  end
-end
+
+set :public, ROOT + '/src/public'
+set :views, ROOT + '/src/views'
+
 # Webrat
 Webrat.configure do |config|
   config.mode = :sinatra
 end
 
 World do
-  session = Webrat::SinatraSession.new( Book )
+  session = Webrat::SinatraSession.new( )
   session.extend(Webrat::Matchers)
   session.extend(Webrat::HaveTagMatcher)
   session.extend( MiniTest::Assertions )
