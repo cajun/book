@@ -7,6 +7,6 @@ http_path = "/"
 css_dir = "./public/stylesheets"
 sass_dir = "./src/sass"
 images_dir = "./public/images"
-output_style = :compressed # :nested, :expanded, :compact, or :compressed
+output_style = :expanded # :nested, :expanded, :compact, or :compressed
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true

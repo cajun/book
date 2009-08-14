@@ -1,7 +1,7 @@
 require Dir.pwd + "/book"
 
 set :root, File.dirname(__FILE__)
-set :app_file, Proc.new { File.join(root, "cook_book.rb") }
+set :app_file, Proc.new { File.join(root, "book.rb") }
 set :run, false
 set :cache_enabled, false
 #set :public, Proc.new { File.join(root, "public") }
@@ -16,4 +16,4 @@ $stdout.reopen(log)
 $stderr.reopen(log)
 
 # Mount our Main class with a base url of /
-run Book
+run Sinatra::Application

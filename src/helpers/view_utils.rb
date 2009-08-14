@@ -28,3 +28,5 @@ module HTMLHelpers
   end
 
 end
+
+Sinatra::Base.send( :include, HTMLHelpers )
