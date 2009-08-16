@@ -30,7 +30,7 @@ end
 post %r{/chef/create.?(\w*)} do |extention|
   expire_cache( "/chef/index" )
   @chef = Chef.new( params["chef"] )
-  
+  debugger 1
   if( @chef.save )
     redirect "/chef/#{@chef.id}.#{extention}"
   else
@@ -38,7 +38,7 @@ post %r{/chef/create.?(\w*)} do |extention|
     when "json"
       { :errors => @chef.errors.to_json, :status => :error, :message => "Faild to save" }.to_json
     else
-      "chef/new".to_sym
+      haml( "chef/new".to_sym )
     end
   end
 end

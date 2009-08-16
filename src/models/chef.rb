@@ -14,10 +14,6 @@ class Chef < Couch
   view_by :last_name
   view_by :first_name
   
-  def initialize( args={} )
-    super( args )
-  end
-  
   def name
     "#{first_name} #{last_name}"
   end

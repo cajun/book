@@ -9,16 +9,20 @@
 require 'rubygems'
 require 'sinatra'
 require File.dirname( __FILE__ ) + "/config/boot"
+require 'ruby-debug'
 
 # ===============
 # = Middle Ware =
 # ===============
+use Rack::Flash
+use Rack::NestedParams
+use Rack::Cache,
+  :metastore   => 'memcached://localhost:11211/meta',
+  :entitystore => 'memcached://localhost:11211/body'
+  
 use Rack::CouchDB::Logger, LOG_DB
 use Rack::CouchDB::BCrypt, {:klass => Chef}
 
-
-
-require 'ruby-debug'
 
 set :static, true
 set :app_file, __FILE__

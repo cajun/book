@@ -5,12 +5,11 @@ couch = CouchRest.new
 LOG_DB = couch.database!('couchrest-logger')
 
 class Couch < CouchRest::ExtendedDocument
+  include CouchRest::Validation
+  
   use_database SERVER.default_database
   timestamps!
 
-  def valid?
-    true
-  end
   
   class << self
     private

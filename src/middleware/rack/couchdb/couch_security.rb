@@ -26,14 +26,18 @@ module CouchSecurity
   end
   
   module InstanceMethods
-    attr_accessor :password
+    attr_accessor :password, :password_confirmation
     
+    def initialize( args={} )
+      @password = args.delete( "password" ) unless args.nil?
+      @password_confirmation = args.delete( "confirm_password" ) unless args.nil?
+      super( args )
+    end
     # If the object has been assigned a password then encrypt it
     def encrypt_password!
-      if( !self['password'].blank? && self['password'] == self['confirm_password'] )
-        self['encrypted_password_store'] = BCrypt::Password.create( self['password'], :cost => 11 )
-        self['password'] = nil
-        self['confirm_password'] = nil
+      if( !password.blank? )
+        self['encrypted_password_store'] = BCrypt::Password.create( password, :cost => 11 )
+        password, password_confirmation = nil, nil
       end
     end
 
@@ -48,7 +52,7 @@ module CouchSecurity
     # Setting Magic Fields on a succesful login
     # 
     # @param [Request] request request object from the controller
-    def set_env_success( request )
+    def set_env_success( request = nil )
       self['login_count'] ||= 0
       self['login_count'] += 1
       self['last_login_at'] = current_login_at
@@ -73,14 +77,15 @@ module CouchSecurity
     end
 
     # Validation Test for the email
-    def valid_email
+    def valid_email?
       unless( email.blank? )
         unless( email =~ email_regex )
-          errors.add(:email, "Your email address does not appear to be valid")
+          return [false, "Your email address does not appear to be valid" ]
         else
-          errors.add(:email, "Your email domain name appears to be incorrect") unless validate_email_domain(email)
+          return [false, "Your email domain name appears to be incorrect" ] unless validate_email_domain(email)
         end
       end
+      true
     end
 
     # Validation Test for the email's domain
@@ -93,6 +98,23 @@ module CouchSecurity
       end
       !@mx.size.zero?
     end
+    
+    def valid_password_confirmation?
+      if( password )
+        unless( password == password_confirmation )
+          return [false, "The password does not match the confirmation" ]
+        end
+      end
+      true
+    end
+    
+    def valid_password_length?
+      if( password && password.length < 6 )
+        [false, "must have more than 6 charters" ]
+      else
+        true
+      end
+    end
   end
   
   def self.included(receiver)
@@ -100,7 +122,11 @@ module CouchSecurity
     
     receiver.send :save_callback, :before, :encrypt_password!
     receiver.send :create_callback, :before, :encrypt_password!
-
+    
+    receiver.send :validates_with_method, :email, :valid_email?
+    receiver.send :validates_with_method, :password, :valid_password_confirmation?
+    receiver.send :validates_with_method, :password, :valid_password_length?
+    
     receiver.send :property, :email
     receiver.send :property, :login
     receiver.send :property, :encrypted_password_store

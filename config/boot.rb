@@ -10,6 +10,7 @@ unless defined?( ROOT )
   HELPERS     = ROOT + "/src/helpers"
   UTILS       = ROOT + '/src/util'
   MIDDLEWARE  = ROOT + '/src/middleware/rack/couchdb'
+  AUTH        = ROOT + '/src/middleware/rack/couchdb/auth'
 
   require CONFIG + '/init'
 end

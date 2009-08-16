@@ -69,7 +69,7 @@ img a {
   margin-left: auto;
   margin-right: auto;
   width: 960px;
-  font-size: 28px;
+  font-size: 18px;
   font-family: monospace;
 }
 
@@ -143,7 +143,7 @@ a:hover {
 }
 
 textarea, input, label {
-  font-size: 28px;
+  font-size: 18px;
   font-family: monospace;
 }
 

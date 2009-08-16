@@ -17,15 +17,20 @@
         %a{ :href => '/' } Home
         
         - if( Chef.current )
+          %a{ :href => '/recipe/index' } Recipe
           %a{ :href => '/logout' } Logout
           %span== Yo! #{Chef.current}
         -else
           %a{ :href => '/chef/new' } Register
           %a{ :href => '/login' } Login
         
+      
         
-
+      
       #content
+        %p{ :class => 'green' }= flash[:notice]
+        %p{ :class => 'red' }= flash[:error]
+        
         =yield
 
       #footer
