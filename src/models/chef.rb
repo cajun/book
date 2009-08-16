@@ -15,7 +15,6 @@ class Chef < Couch
   view_by :first_name
   
   def initialize( args={} )
-    password = args.delete( :password ) unless args.nil?
     super( args )
   end
   

@@ -23,7 +23,6 @@ module Rack
           if( request.post? && login? && auth_provided? )
             login!
           elsif( logout? )
-            debugger 1
             logout!
           else
             @app.call(env)

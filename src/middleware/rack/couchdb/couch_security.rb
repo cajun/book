@@ -30,8 +30,10 @@ module CouchSecurity
     
     # If the object has been assigned a password then encrypt it
     def encrypt_password!
-      if( password )
-        self['encrypted_password_store'] = BCrypt::Password.create( password, :cost => 11 )
+      if( !self['password'].blank? && self['password'] == self['confirm_password'] )
+        self['encrypted_password_store'] = BCrypt::Password.create( self['password'], :cost => 11 )
+        self['password'] = nil
+        self['confirm_password'] = nil
       end
     end
 
@@ -40,28 +42,28 @@ module CouchSecurity
     #
     # @return [BCrypt::Password] the encrypted password as a BCrypt Object
     def encrypted_password
-      BCrypt::Password.new( self['encrypted_password_store'] )
+      BCrypt::Password.new( self['encrypted_password_store'] || '' )
     end
 
     # Setting Magic Fields on a succesful login
     # 
     # @param [Request] request request object from the controller
     def set_env_success( request )
-      login_count ||= 0
-      login_count += 1
-      last_login_at = current_login_at
-      current_login_at = Time.now
-      last_login_ip = current_login_ip
+      self['login_count'] ||= 0
+      self['login_count'] += 1
+      self['last_login_at'] = current_login_at
+      self['current_login_at'] = Time.now
+      self['last_login_ip'] = current_login_ip
       if( request )
-        current_login_ip = request.env["REMOTE_ADDR"]
+        self['current_login_ip'] = request.env["REMOTE_ADDR"]
         request.env["REMOTE_USER"] = id
       end
       save
     end
 
     def set_env_failure( request = nil )
-      failed_login_count ||= 0
-      failed_login_count += 1
+      self['failed_login_count'] ||= 0
+      self['failed_login_count'] += 1
       save
     end
 
