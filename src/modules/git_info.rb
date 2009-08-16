@@ -23,5 +23,3 @@ module GitInfo
       @repo ||= Repo.new( ROOT )
     end
 end
-
-Sinatra::Base.send :include, GitInfo

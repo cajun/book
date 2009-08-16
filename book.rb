@@ -10,26 +10,26 @@ require 'rubygems'
 require 'sinatra'
 require File.dirname( __FILE__ ) + "/config/boot"
 
+# ===============
+# = Middle Ware =
+# ===============
+use Rack::CouchDB::Logger, LOG_DB
+use Rack::CouchDB::BCrypt, {:klass => Chef}
+
+
+
+require 'ruby-debug'
+
 set :static, true
 set :app_file, __FILE__
 set :views, Proc.new { File.join(ROOT, "src", "views") }
 set :sessions, true
 set :cache_enabled, false
 
-# ===============
-# = Middle Ware =
-# ===============
-#use Rack::NestedParams
-use Rack::CouchDB::Logger, LOG_DB
 
-# ===========
-# = filters =
-# ===========
-before do
-  if( session[:chef_id] )
-    Chef.current = Chef.get( session[:chef_id] )
-  end
-end
+Sinatra::Base.send :include, GitInfo
+Sinatra::Base.send :include, PageCache
+
 
 # ===============
 # = About Pages =

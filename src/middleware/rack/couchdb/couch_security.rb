@@ -12,10 +12,16 @@ module CouchSecurity
     # @param [String] password guess what this field is...the password field
     # 
     # @return [Chef,nil] if a chef is returned then authentication worked, nil if not
-    def authenticate( name, password )
+    def authenticate( name, password, request = nil )
       user = [ by_email( :key => name ), by_login( :key => name ) ].flatten.compact.first
       
-      user if( user && user.encrypted_password == password )
+      if ( user && user.encrypted_password == password )
+        user.set_env_success request 
+        user 
+      elsif( user )
+        user.set_env_failure
+        nil
+      end
     end
   end
   
@@ -46,21 +52,24 @@ module CouchSecurity
       last_login_at = current_login_at
       current_login_at = Time.now
       last_login_ip = current_login_ip
-      current_login_ip = request.env["REMOTE_ADDR"]
+      if( request )
+        current_login_ip = request.env["REMOTE_ADDR"]
+        request.env["REMOTE_USER"] = id
+      end
       save
     end
-    
+
     def set_env_failure( request = nil )
       failed_login_count ||= 0
       failed_login_count += 1
       save
     end
-    
+
     # Email Regular Expression Validator
     def email_regex
       /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
     end
-    
+
     # Validation Test for the email
     def valid_email
       unless( email.blank? )

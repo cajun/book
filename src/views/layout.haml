@@ -17,12 +17,13 @@
         %a{ :href => '/' } Home
         
         - if( Chef.current )
-          %h2== Welcome #{Chef.current}
+          %a{ :href => '/logout' } Logout
+          %span== Yo! #{Chef.current}
         -else
           %a{ :href => '/chef/new' } Register
           %a{ :href => '/login' } Login
         
-
+        
 
       #content
         =yield

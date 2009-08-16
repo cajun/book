@@ -47,8 +47,6 @@ module PageCache
   end
 end 
 
-Sinatra::Base.send :include, PageCache
-
 # Example
 # get '/' do 
 #   cache erb( :index, :layout => 'app.erb' ) 

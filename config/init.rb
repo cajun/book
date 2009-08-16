@@ -2,7 +2,6 @@
 # = Required libs =
 # =================
 require 'rubygems'
-require 'sinatra'
 require 'fileutils'
 require 'couchrest'
 require 'resolv'

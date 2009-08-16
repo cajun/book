@@ -6,7 +6,6 @@
 #  Copyright 2009 Cajun Country. All rights reserved.
 # 
 class Chef < Couch
-  include CouchSecurity
   attr_accessor :casted_by
 
   property :first_name
