@@ -9,6 +9,7 @@
   ruby-debug 
   webrat
   minitest
+  configatron
   pony
   rack-rack-contrib
 ).each do |gem|

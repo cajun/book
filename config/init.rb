@@ -14,10 +14,13 @@ require 'linguistics'
 require 'facets/string'
 require 'haml'
 require 'grit'
+require 'pony'
+require 'configatron'
 
 Linguistics::use( :en, :installProxy => true )
 English = Linguistics::EN
 
+configatron.configure_from_yaml( "#{CONFIG}/conf.yml" )
 
 $COUCHREST_DEBUG = true
 # ==========================

@@ -25,6 +25,10 @@ module Rack
         elsif( authorized? )
           klass.current =  klass.get( request.env['REMOTE_USER'] )
           @app.call(env)
+        elsif( register? )
+          register!
+        elsif( activate? )
+          activate!
         else
           @app.call(env)
         end
@@ -38,6 +42,11 @@ module Rack
       
       def go_home!
         response.redirect '/'
+        response.finish
+      end
+      
+      def go_back!
+        response.redirect request.path_info
         response.finish
       end
       

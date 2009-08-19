@@ -15,7 +15,7 @@ module CouchSecurity
     def authenticate( name, password, request = nil )
       user = [ by_email( :key => name ), by_login( :key => name ) ].flatten.compact.first
       
-      if ( user && user.encrypted_password == password )
+      if ( user && user.encrypted_password == password && user.single_access_token.nil? )
         user.set_env_success request 
         user 
       elsif( user )
@@ -124,8 +124,8 @@ module CouchSecurity
     receiver.send :create_callback, :before, :encrypt_password!
     
     receiver.send :validates_with_method, :email, :valid_email?
-    receiver.send :validates_with_method, :password, :valid_password_confirmation?
-    receiver.send :validates_with_method, :password, :valid_password_length?
+    receiver.send :validates_with_method, :password, :valid_password_confirmation?, :if => :password
+    receiver.send :validates_with_method, :password, :valid_password_length?, :if => :password
     
     receiver.send :property, :email
     receiver.send :property, :login

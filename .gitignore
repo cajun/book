@@ -1,3 +1,4 @@
 *.db
 *.html
 .sass-cache
+*.yml

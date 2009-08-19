@@ -29,13 +29,16 @@ module Rack
       def login!
         klass_instance = klass.authenticate( params["login"], params["password"], request )
         if( klass_instance.nil? )
-          unauthorized
+          flash['error'] = 'Login failed'
+          klass.current = nil
+          request.env['REMOTE_USER'] = nil
         else
           flash['notice'] = "Laissez les bon temps rouler!"
           klass_instance.set_env_success( request )
           klass.current =  klass_instance
-          go_home!
         end
+    
+        go_home!
       end
 
       def logout?
