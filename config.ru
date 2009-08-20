@@ -10,10 +10,5 @@ set :environment, ENV['RACK_ENV'].to_sym
 set :sessions, true
 set :static, true
 
-FileUtils.mkdir_p 'log' unless File.exists?('log')
-log = File.new("log/sinatra.log", "a")
-$stdout.reopen(log)
-$stderr.reopen(log)
-
 # Mount our Main class with a base url of /
 run Sinatra::Application

@@ -1,0 +1,26 @@
+.content
+  %label{ :for => 'chef[login]' } Login
+  %input{ :name => 'chef[login]', :id => 'chef[login]', :value => @chef.login }
+        
+.content
+  %label{ :for => 'chef[email]' } Email
+  %input{ :name => 'chef[email]', :id => 'chef[email]', :value => @chef.email }
+
+.content
+  %label{ :for => 'chef[first_name]' } First Name
+  %input{ :name => 'chef[first_name]', :id => 'chef[fisrt_name]', :value => @chef.first_name }
+        
+.content
+  %label{ :for => 'chef[last_name]' } Last Name
+  %input{ :name => 'chef[last_name]', :id => 'chef[last_name]', :value => @chef.last_name }
+
+.content
+  %label{ :for => 'chef[password]' } Password
+  %input{ :type => 'password', :name => 'chef[password]', :id => 'chef[password]' }
+
+.content
+  %label{ :for => 'chef[confirm_password]' } Confirm Password
+  %input{ :type => 'password', :name => 'chef[confirm_password]', :id => 'chef[confirm_password]' }
+
+.content
+  %input{ :type => 'submit', :value => 'Save it!' }

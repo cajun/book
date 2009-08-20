@@ -1,2 +1,6 @@
 %li
-  %a{ :href => "/chef/#{list.id}" }= list.name
+  %p
+    = list.name
+    %a{ :href => "/chef/#{list.id}" } View
+    %a{ :href => "/chef/edit/#{list.id}" } Edit
+    

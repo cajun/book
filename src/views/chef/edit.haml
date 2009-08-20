@@ -1,0 +1,8 @@
+#info
+  %h2== Hey #{@chef.name}
+
+  %form{ :action => "/chef/update/#{@chef.id}", :method => "post" }
+
+    = partial :'chef/form'
+  
+  %a{ :href => "/chef/index" } Back to Chefs
