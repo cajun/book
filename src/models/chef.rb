@@ -13,6 +13,10 @@ class Chef < Couch
   
   view_by :last_name
   view_by :first_name
+
+  def recipes
+    Recipe.by_chef_id :key => self.id
+  end
   
   def name
     "#{first_name} #{last_name}"

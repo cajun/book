@@ -2,11 +2,11 @@
   %h2= @recipe.name
   %h3= @recipe.chef
   
-- @recipe.ingredients.each do |ingredient|
+- @recipe.groceries.each do |grocery|
   .ingredient
-    %span ingredient.name
-    %span ingredient.amount
-    %span ingredient.unit
+    %span grocery.name
+    %span grocery.amount
+    %span grocery.unit
     
 - @recipe.sections.each do |section|
   %h2= section.header

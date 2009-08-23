@@ -1,3 +1,4 @@
+@recipe
 Feature: Recipe maintance
   In order to keep recipes in check
   As valid recipes

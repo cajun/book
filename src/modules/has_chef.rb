@@ -20,10 +20,13 @@ module HasChef
     def chef
       Chef.get( self["chef_id"] ) if self["chef_id"]
     end
+    
   end
   
   def self.included(receiver)
     receiver.extend         ClassMethods
+    
+    receiver.send :view_by, :chef_id
     receiver.send :include, InstanceMethods
   end
 end

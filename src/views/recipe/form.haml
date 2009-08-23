@@ -1,0 +1,25 @@
+.content
+  %label{ :for => 'recipe[name]' } Name
+  %input{ :name => 'recipe[name]', :id => 'recipe[name]', :value => @recipe.name }
+
+%h3 Groceries
+%a{ :href => "javascript:$('#groceries').append(\"#{partial :'recipe/groceries_template', :locals => {:grocery => Grocery.new} }\")" } Add Food Stuff
+#groceries.content
+  - @recipe.groceries.each do |grocery|
+    = partial :'recipe/groceries_template', :locals => {:grocery => grocery}
+  
+%h3 Sections
+%a{ :href => "javascript:$('#sections').append(\"#{partial :'recipe/sections_template', :locals => {:section => Section.new}}\")" } Add Section
+#sections.content
+  - @recipe.sections.each do |section|
+    = partial :'recipe/sections_template', :locals => {:section => section }
+  
+%h3 Media
+.content
+  %label{ :for => 'recipe[photo]' } Photos
+  %input{ :name => 'recipe[photo]', :id => 'recipe[photo]', :type => 'file'  }
+
+.content
+  %label{ :for => 'recipe[video]' } Videos
+  %input{ :name => 'recipe[video]', :id => 'recipe[video]', :type => 'file'  }
+  

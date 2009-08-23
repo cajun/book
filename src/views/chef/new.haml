@@ -3,5 +3,8 @@
 
   %form{ :action => '/register', :method => "post" }
     = partial :'chef/form'
-
+    
+    .content
+      %input{ :type => 'submit', :value => 'Save it!' }
+      
   %a{ :href => "/chef/index" } Back to Chefs

@@ -2,29 +2,6 @@
   %h2 Create your new recipe
  
 %form{ :action => '/recipe/create', :enctype => 'multipart/form-data', :method => "post" }
-  .content
-    %label{ :for => 'recipe[name]' } Name
-    %input{ :name => 'recipe[name]', :id => 'recipe[name]' }
-
-  %h3 Ingredients
-  .content
-    %a{ :href => '', :id => 'link[ingredients][0]'  } Add Ingredient
-    %label{ :for => 'recipe[name]' } Ingredient
-    %input{ :name => 'recipe[ingredients][0]', :id => 'recipe[ingredients][0]' }
-    
-  %h3 Sections
-  .content
-    %a{ :href => '', :id => 'link[sections][0]'  } Add Section
-    %label{ :for => 'recipe[sections][0]' } Header
-    %input{ :rows => 10, :name => 'recipe[sections][0][header]', :id => 'recipe[sections][0][header]' }
-    
-  %h3 Media
-  .content
-    %label{ :for => 'recipe[photo]' } Photos
-    %input{ :name => 'recipe[photo]', :id => 'recipe[photo]', :type => 'file'  }
-
-  .content
-    %label{ :for => 'recipe[video]' } Videos
-    %input{ :name => 'recipe[video]', :id => 'recipe[video]', :type => 'file'  }
+  = partial :'recipe/form'
 
   %input{ :type => 'submit', :value => 'Save it!' }

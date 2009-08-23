@@ -58,17 +58,19 @@ module Tokens
     end
     
     def deliver_mail( subject, body, from = 'cajun@samuraidelicatessen.org' )
-      Pony.mail( :to => email, :from => from,
-        :subject => subject , :body => body, :via => :smtp,
-        :smtp => { 
-          :host => configatron.smtp.host, 
-          :domain => configatron.smtp.domain,
-          :user => configatron.smtp.user,
-          :password => configatron.smtp.password,
-          :port => configatron.smtp.port,
-          :auth => configatron.smtp.auth
-        }
-      )
+      unless( ENV['RACK_ENV'] == 'test' )
+        Pony.mail( :to => email, :from => from,
+          :subject => subject , :body => body, :via => :smtp,
+          :smtp => { 
+            :host => configatron.smtp.host, 
+            :domain => configatron.smtp.domain,
+            :user => configatron.smtp.user,
+            :password => configatron.smtp.password,
+            :port => configatron.smtp.port,
+            :auth => configatron.smtp.auth
+          }
+        )
+      end
     end
     
     private

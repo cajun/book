@@ -13,19 +13,24 @@ class Recipe < Couch
   property :photo
   property :video
   property :state
-  property :ingredients, :cast_as => [ 'Ingredient' ], :default => []
+  property :groceries, :cast_as => [ 'Grocery' ], :default => []
   property :results, :cast_as => [ 'Result' ], :default => []
   property :commit, :cast_as => "Commit"
+  
+  # ===============
+  # = Validations =
+  # ===============
+  validates_present :name
   
   # ========================
   # = Setting up the views =
   # ========================
   view_by :name
-  view_by :ingredients, :map => 
+  view_by :groceries, :map => 
     "function(doc){
-      if ((doc['couchrest-type'] == 'Recipe') && doc['ingredients']) {
-        for( var ix in doc['ingredients'] ){
-          emit( doc['ingredients'][ix].name,{recipe_id: doc._id, count: 1});  
+      if ((doc['couchrest-type'] == 'Recipe') && doc['groceries']) {
+        for( var ix in doc['groceries'] ){
+          emit( doc['groceries'][ix].name,{recipe_id: doc._id, count: 1});  
         }
       }
     }
@@ -58,7 +63,7 @@ class Recipe < Couch
     super( args )
     
     sections_from_params( para_sections )
-    ingredients_from_params( para_ingredients )
+    groceries_from_params( para_ingredients )
   end
   
   def sections_from_params( params )
@@ -75,20 +80,20 @@ class Recipe < Couch
   end
   private( :sections_from_params )
   
-  def ingredients_from_params( params )
+  def groceries_from_params( params )
     return unless params
-    params.each do |index, ingredient_hash|
-      next if ingredient_hash.nil?
-      result = detect_ingredients( ingredient_hash['name'] )
+    params.each do |index, groceries_hash|
+      next if groceries_hash.nil?
+      result = detect_groceries( groceries_hash['name'] )
       if( result )
-        result.amount = ingredient_hash['amount']
-        result.unit = ingredient_hash['unit']
+        result.amount = groceries_hash['amount']
+        result.unit = groceries_hash['unit']
       else
-        ingredients << Ingredient.new( ingredient_hash )
+        groceries << Grocery.new( groceries_hash )
       end
     end
   end
-  private( :sections_from_params )
+  private( :groceries_from_params )
   # ===============
   # = Validations =
   # ===============
@@ -101,13 +106,6 @@ class Recipe < Couch
     true #(!Chef.current.nil? && Chef.current) == self.chef
   end
 
-  # Check to determine if this recipe is valid
-  # Limited validations now for recipes
-  #
-  # @returns [Boolean] the succcessfullness of the save
-  def valid?
-    !name.nil?
-  end
   
   def commit?
     false
@@ -126,8 +124,8 @@ class Recipe < Couch
     sections.detect{ |section| section.header == section_header } 
   end
   
-  def detect_ingredients( name )
-    ingredients.detect{ |ingredient| ingredient.name == name } 
+  def detect_groceries( name )
+    groceries.detect{ |grocery| grocery.name == name } 
   end
   
   def instructions=( text )
@@ -135,7 +133,7 @@ class Recipe < Couch
   end
   
   def instructions
-    instr = detect_ingredients( 'Instructions' )
+    instr = detect_section( 'Instructions' )
     if( instr )
       instr
     else

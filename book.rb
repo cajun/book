@@ -9,18 +9,22 @@
 require 'rubygems'
 require 'sinatra'
 require File.dirname( __FILE__ ) + "/config/boot"
-require 'ruby-debug'
+
 
 # ===============
 # = Middle Ware =
 # ===============
-use Rack::Flash
-use Rack::NestedParams
+use Rack::Flash 
 use Rack::Cache,
-  :metastore   => 'memcached://localhost:11211/meta',
-  :entitystore => 'memcached://localhost:11211/body'
+  :verbose => true,
+  :metastore   => 'memcached://localhost:11211/metastore',
+  :entitystore => 'memcached://localhost:11211/entitystore'
+
+configure :production, :development do
+  use Rack::CouchDB::Logger, LOG_DB
+end
   
-use Rack::CouchDB::Logger, LOG_DB
+use Rack::NestedParams
 use Rack::CouchDB::BCrypt, {:klass => Chef}
 
 
@@ -30,7 +34,6 @@ set :views, Proc.new { File.join(ROOT, "src", "views") }
 set :sessions, true
 set :cache_enabled, false
 
-
 Sinatra::Base.send :include, GitInfo
 Sinatra::Base.send :include, PageCache
 
@@ -39,11 +42,13 @@ Sinatra::Base.send :include, PageCache
 # = About Pages =
 # ===============
 get '/' do
+  #headers['Cache-Control'] = 'public, max-age=60'
   haml( :index )
 end
 
 
 get '/login' do
+  #headers['Cache-Control'] = 'public, max-age=60'
   haml( :login )
 end
 
@@ -55,3 +60,10 @@ post '/deploy' do
   `git pull origin master`
   `touch tmp/restart.txt`
 end
+
+#get '/stylesheets/*.css' do
+#  headers['Cache-Control'] = 'public, max-age=60'
+#  content_type 'text/css', :charset => 'utf-8'
+#  File.readlines( "#{ROOT}/public/stylesheets/#{params[:splat]}.css" )
+#end
+#

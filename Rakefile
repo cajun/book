@@ -5,7 +5,7 @@ require 'cucumber'
 require 'cucumber/rake/task'
 
 namespace( :test ) do
-  Cucumber::Rake::Task.new(:features) do |t|
+  Cucumber::Rake::Task.new(:features) do |t, args|
     t.cucumber_opts = "features --guess --format pretty"
   end
   

@@ -80,9 +80,9 @@ module CouchSecurity
     def valid_email?
       unless( email.blank? )
         unless( email =~ email_regex )
-          return [false, "Your email address does not appear to be valid" ]
+          return [false, "Your email address #{email }does not appear to be valid" ]
         else
-          return [false, "Your email domain name appears to be incorrect" ] unless validate_email_domain(email)
+          return [false, "Your email domain name #{email} appears to be incorrect" ] unless validate_email_domain(email)
         end
       end
       true
@@ -110,7 +110,7 @@ module CouchSecurity
     
     def valid_password_length?
       if( password && password.length < 6 )
-        [false, "must have more than 6 charters" ]
+        [false, "You password must have more than 6 charters" ]
       else
         true
       end

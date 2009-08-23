@@ -9,9 +9,10 @@ Feature: Chef CRUD
     And you fill in chef[first_name] with '<first_name>'
     And you fill in chef[last_name] with '<last_name>'
     And you fill in chef[password] with '<password>'
+    And you fill in chef[confirm_password] with '<password>'
     Then you click the button 'Save it!' and create a new Chef
 
   Examples:
-    |email        |first_name|last_name|login |password   |
-    |eew@bar.com  |black     |nurse    |cajun |supar cool |
-    |vww@w00t.com |jack      |slap     |budda |black sheep|
+    |email          |first_name|last_name|login |password   |
+    |eew@google.com |black     |nurse    |cajun |supar cool |
+    |vww@yahoo.com  |jack      |slap     |budda |black sheep|

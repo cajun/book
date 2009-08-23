@@ -1,0 +1,7 @@
+.info
+  %h2 Create your new recipe
+ 
+%form{ :action => '/recipe/update/#{@recipe.id}', :enctype => 'multipart/form-data', :method => "post" }
+  = partial :'recipe/form'
+
+  %input{ :type => 'submit', :value => 'Update' }

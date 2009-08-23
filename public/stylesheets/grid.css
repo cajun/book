@@ -152,7 +152,7 @@ label {
   float: left;
   margin-left: 10px;
   margin-right: 10px;
-  width: 280px;
+  width: 100px;
 }
 
 textarea, input {
@@ -161,4 +161,64 @@ textarea, input {
   margin-left: 10px;
   margin-right: 10px;
   width: 580px;
+}
+
+.hidden {
+  display: none;
+}
+
+.full_width {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 940px;
+}
+
+.one {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 40px;
+}
+
+.two {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100px;
+}
+
+.three {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 160px;
+}
+
+.four {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 220px;
+}
+
+.five {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 280px;
+}
+
+.six {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 340px;
 }

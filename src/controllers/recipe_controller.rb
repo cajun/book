@@ -10,7 +10,8 @@ get %r{/recipe/index.?(\w*)} do |extention|
 end
 
 # new
-get %r{/recipe/new} do
+get "/recipe/new" do
+  @recipe = Recipe.new
   haml( :"recipe/new" )
 end
 
@@ -26,9 +27,22 @@ get %r{/recipe/(\w+).?(\w*)} do |id,extention|
   end
 end
 
+post "/recipe/update/:id" do |id|
+  @recipe = Recipe.get( id )
+  
+  if( @recipe.update_attributes( params['recipe'] ) )
+    haml( :"recipe/show".to_sym )
+  else
+    flash['error'] = 'Sorry I could not update the recipe.'
+    haml( :"recipe/edit" )
+  end 
+end
+
 # create
 post %r{/recipe/create.?(\w*)} do |extention|
   expire_cache( "/recipe/index" )
+  
+debugger 1
   @recipe = Recipe.new( params["recipe"] )
   @recipe.chef = Chef.current
   

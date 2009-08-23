@@ -43,37 +43,41 @@ end
 # ===============
 # = Validations =
 # ===============
-Given /the (\w+)'s (\w+) will have (\d+) more/ do |model, collection, count|
+Then /the (\w+)'s (\w+) will have (\d+) more/ do |model, collection, count|
   var_model = instance_variable_get( "@#{model}" )
   original_size = instance_variable_get( "@#{collection}_original_size" )
   assert_equal( ( original_size + count.to_i ), var_model.send( collection ).size )
 end
 
-Given /^a valid (\w+)$/ do |instance_var|
-  assert( instance_variable_get( "@#{instance_var}" ).valid? )
+Then /^a valid (\w+)$/ do |instance_var|
+  assert( instance_variable_get( "@#{instance_var}" ).valid?, instance_variable_get( "@#{instance_var}").errors.full_messages )
 end
 
-Given /^(\w+) will not be valid$/ do |instance_var|
+Then /^the (\w+) is valid$/ do |instance_var|
+  Then "a valid #{instance_var}"
+end
+
+Then /^(\w+) will not be valid$/ do |instance_var|
   assert( !instance_variable_get( "@#{instance_var}" ).valid? )
 end
 
-Given /^the (\w+)'s (\w+) is equal to '(.+)'$/ do |instance_var, field, test|
+Then /^the (\w+)'s (\w+) is equal to '(.+)'$/ do |instance_var, field, test|
   var_item = instance_variable_get( "@#{instance_var}" )
   assert_equal( test, var_item.send( field ) )
 end
 
-Given /^the (\w+)'s (\w+) is not equal to '(.+)'$/ do |instance_var, field, test|
+Then /^the (\w+)'s (\w+) is not equal to '(.+)'$/ do |instance_var, field, test|
   var_item = instance_variable_get( "@#{instance_var}" )
   assert( var_item.send( field ) != test,
     "#{var_item.send( field )} should not equal #{test}")
 end
 
-Given /^the (\w+)'s (\w+) is decrypted to '(.+)'$/ do |instance_var, field, test|
+Then /^the (\w+)'s (\w+) is decrypted to '(.+)'$/ do |instance_var, field, test|
   var_item = instance_variable_get( "@#{instance_var}" )
   assert( var_item.send( field ) == test )
 end
 
-Given /^the (\w+)'s (\w+) is not decrypted to '(.+)'$/ do |instance_var, field, test|
+Then /^the (\w+)'s (\w+) is not decrypted to '(.+)'$/ do |instance_var, field, test|
   var_item = instance_variable_get( "@#{instance_var}" )
   assert( !(var_item.send( field ) == test) )
 end
@@ -82,11 +86,11 @@ end
 # ==========
 # = Saving =
 # ==========
-Given /^save the (\w+)$/ do |model|
+Then /^save the (\w+)$/ do |model|
   instance_variable_get( "@#{model}" ).save
 end
 
-Given /^the (\w+) is saved$/ do |model|
+Then /^the (\w+) is saved$/ do |model|
   Given "save the #{model}"
 end
 
