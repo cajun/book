@@ -15,7 +15,6 @@ class Recipe < Couch
   property :state
   property :groceries, :cast_as => [ 'Grocery' ], :default => []
   property :results, :cast_as => [ 'Result' ], :default => []
-  property :commit, :cast_as => "Commit"
   
   # ===============
   # = Validations =
@@ -50,25 +49,31 @@ class Recipe < Couch
   # =============
   # = Callbacks =
   # =============
-  save_callback :before, :save_commit
   save_callback :before, :can_edit?
   
   # ===============
   # = Initilizers =
   # ===============
   def initialize( args={} )
-    para_sections = args.delete( 'sections' )
-    para_ingredients = args.delete( 'sections' )
+    update_associations( args ) do |params|
+      super( params )
+    end
+  end
+  
+  # Update the associations from the params hash from the controller
+  def update_associations( params )
+    para_sections = params.delete( 'sections' )
+    para_ingredients = params.delete( 'groceries' )
     
-    super( args )
+    yield( params ) if block_given? 
     
     sections_from_params( para_sections )
     groceries_from_params( para_ingredients )
   end
-  
+
   def sections_from_params( params )
     return unless params
-    params.each do |index, section_hash|
+    params.each do |section_hash|
       next if section_hash.nil?
       result = detect_section( section_hash['header'] )
       if( result )
@@ -82,7 +87,7 @@ class Recipe < Couch
   
   def groceries_from_params( params )
     return unless params
-    params.each do |index, groceries_hash|
+    params.each do |groceries_hash|
       next if groceries_hash.nil?
       result = detect_groceries( groceries_hash['name'] )
       if( result )
@@ -106,16 +111,6 @@ class Recipe < Couch
     true #(!Chef.current.nil? && Chef.current) == self.chef
   end
 
-  
-  def commit?
-    false
-  end
-  
-  def save_commit
-    if commit?
-      commit.save
-    end
-  end
   
   # =========
   # = Utils =

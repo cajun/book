@@ -4,7 +4,6 @@
     %link{:rel => "stylesheet", :href => "/stylesheets/grid.css", :type => "text/css", :media => "screen, projection" }
     %link{:rel => "stylesheet", :href => "/stylesheets/text.css", :type => "text/css", :media => "screen, projection" }
 
-  = page_cached_timestamp
   %body
     #page
       #header-left
@@ -28,8 +27,7 @@
         
       
       #content
-        %p{ :class => 'green' }= flash[:notice]
-        %p{ :class => 'red' }= flash[:error]
+        = partial :notice
         
         =yield
 

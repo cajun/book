@@ -1,16 +1,20 @@
 .info
   %h2= @recipe.name
   %h3= @recipe.chef
-  
-- @recipe.groceries.each do |grocery|
-  .ingredient
-    %span grocery.name
-    %span grocery.amount
-    %span grocery.unit
+
+%h2 Groceries
+%ul
+  - @recipe.groceries.each do |grocery|
+    %li.ingredient
+      %span= grocery.name
+      %span= grocery.amount
+      %span= grocery.unit
     
+
 - @recipe.sections.each do |section|
   %h2= section.header
   %p= section.text
 
-
-#comments yeah you just created a new recipe
+.content
+  %a{ :href => "/recipe/edit/#{@recipe.id}" } Make Some Changes
+  %a{ :href => "/recipe/index" } Back to Recipes

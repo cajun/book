@@ -6,9 +6,6 @@
 #  Copyright 2009 Cajun Country. All rights reserved.
 # 
 module HasChef
-  module ClassMethods
-    
-  end
   
   module InstanceMethods
     def chef=( chef )
@@ -24,7 +21,6 @@ module HasChef
   end
   
   def self.included(receiver)
-    receiver.extend         ClassMethods
     
     receiver.send :view_by, :chef_id
     receiver.send :include, InstanceMethods

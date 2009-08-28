@@ -1,0 +1,14 @@
+.full_width
+  .six
+    - if flash[:notice].not_nil?
+      .ui-widget.ui-state-highlight.ui-corner-all
+        %p
+          %span.ui-icon.ui-icon-info{ :style => 'float: left; margin-right: .3em;' }
+          = flash[:notice]
+  .six
+    - if flash[:error].not_nil?
+      .ui-widget.ui-state-error.ui-corner-all
+        %p
+          %span.ui-icon.ui-icon-alert{ :style => 'float: left; margin-right: .3em;' }
+          = flash[:error]
+

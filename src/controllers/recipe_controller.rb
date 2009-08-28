@@ -16,20 +16,22 @@ get "/recipe/new" do
 end
 
 # show
-get %r{/recipe/(\w+).?(\w*)} do |id,extention|
+get '/recipe/:id' do |id|
   @recipe = Recipe.get( id )
 
-  case extention
-  when "json"
-    @recipe.to_json
-  else
-    haml( :"recipe/show" )
-  end
+  haml( :"recipe/show" )
+end
+
+# show
+get '/recipe/edit/:id' do |id|
+  @recipe = Recipe.get( id )
+  haml( :"recipe/edit" )
 end
 
 post "/recipe/update/:id" do |id|
   @recipe = Recipe.get( id )
   
+  @recipe.update_associations( params['recipe'] )
   if( @recipe.update_attributes( params['recipe'] ) )
     haml( :"recipe/show".to_sym )
   else
@@ -40,9 +42,6 @@ end
 
 # create
 post %r{/recipe/create.?(\w*)} do |extention|
-  expire_cache( "/recipe/index" )
-  
-debugger 1
   @recipe = Recipe.new( params["recipe"] )
   @recipe.chef = Chef.current
   

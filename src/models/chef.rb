@@ -14,6 +14,7 @@ class Chef < Couch
   view_by :last_name
   view_by :first_name
 
+  # Pull All the recipes via the chef
   def recipes
     Recipe.by_chef_id :key => self.id
   end

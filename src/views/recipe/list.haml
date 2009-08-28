@@ -1,2 +1,5 @@
 %li
-  %a{ :href => "/recipe/#{list.id}" }= list.name
+  %p
+    = list.name
+    %a{ :href => "/recipe/#{list.id}" } View
+    %a{ :href => "/recipe/edit/#{list.id}" } Edit

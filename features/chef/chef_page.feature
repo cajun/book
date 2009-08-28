@@ -1,5 +1,5 @@
 @chef
-Feature: Chef CRUD
+Feature: U 
   Testing simple CRUD on web pages
     
   Scenario Outline: Create a new recipe by entering the fields

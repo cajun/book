@@ -5,3 +5,6 @@
   = partial :'recipe/form'
 
   %input{ :type => 'submit', :value => 'Update' }
+
+.content
+  %a{ :href => "/recipe/#{@recipe.id}" } Check it out

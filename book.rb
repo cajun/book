@@ -35,7 +35,6 @@ set :sessions, true
 set :cache_enabled, false
 
 Sinatra::Base.send :include, GitInfo
-Sinatra::Base.send :include, PageCache
 
 
 # ===============
@@ -47,6 +46,9 @@ get '/' do
 end
 
 
+# ===================
+# = Base Login page =
+# ===================
 get '/login' do
   #headers['Cache-Control'] = 'public, max-age=60'
   haml( :login )
@@ -60,10 +62,3 @@ post '/deploy' do
   `git pull origin master`
   `touch tmp/restart.txt`
 end
-
-#get '/stylesheets/*.css' do
-#  headers['Cache-Control'] = 'public, max-age=60'
-#  content_type 'text/css', :charset => 'utf-8'
-#  File.readlines( "#{ROOT}/public/stylesheets/#{params[:splat]}.css" )
-#end
-#

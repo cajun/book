@@ -3,13 +3,13 @@
   %input{ :name => 'recipe[name]', :id => 'recipe[name]', :value => @recipe.name }
 
 %h3 Groceries
-%a{ :href => "javascript:$('#groceries').append(\"#{partial :'recipe/groceries_template', :locals => {:grocery => Grocery.new} }\")" } Add Food Stuff
+%a{ :href => "javascript:$('#groceries').append(\"#{partial :'recipe/groceries_template', :locals => {:grocery => Grocery.new} }\")" } Make Groceries
 #groceries.content
   - @recipe.groceries.each do |grocery|
     = partial :'recipe/groceries_template', :locals => {:grocery => grocery}
   
 %h3 Sections
-%a{ :href => "javascript:$('#sections').append(\"#{partial :'recipe/sections_template', :locals => {:section => Section.new}}\")" } Add Section
+%a{ :href => "javascript:$('#sections').append(\"#{partial :'recipe/sections_template', :locals => {:section => Section.new}}\")" } Tell Me Whats To Do
 #sections.content
   - @recipe.sections.each do |section|
     = partial :'recipe/sections_template', :locals => {:section => section }

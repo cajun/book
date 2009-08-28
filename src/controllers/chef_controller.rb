@@ -1,3 +1,6 @@
+# ================================================
+# = Set of routes that will be used for the chef =
+# ================================================
 get %r{/chef/index.?(\w*)} do |extention|
   @chefs = Chef.all( :limit => 10 )
   
@@ -30,6 +33,7 @@ end
 
 post "/chef/update/:id" do |id|
   @chef = Chef.get( id )
+  # Thses params have to be assigned by hand
   pass = params['chef'].delete( 'password' )
   confirm_pass = params['chef'].delete( 'confirm_password' )
 
@@ -44,21 +48,4 @@ post "/chef/update/:id" do |id|
     flash['error'] = 'Sorry I could not update the chef.'
     haml( :"chef/edit" )
   end 
-end
-
-# create
-post %r{/chef/create.?(\w*)} do |extention|
-  expire_cache( "/chef/index" )
-  @chef = Chef.new( params["chef"] )
-
-  if( @chef.save )
-    redirect "/chef/#{@chef.id}.#{extention}"
-  else
-    case extention
-    when "json"
-      { :errors => @chef.errors.to_json, :status => :error, :message => "Faild to save" }.to_json
-    else
-      haml( :"chef/new" )
-    end
-  end
 end
