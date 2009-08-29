@@ -46,7 +46,7 @@ post %r{/recipe/create.?(\w*)} do |extention|
   @recipe.chef = Chef.current
   
   if( @recipe.save )
-    redirect "/recipe/#{@recipe.id}.#{extention}"
+    redirect "/recipe/#{@recipe.id}"
   else
     case extention
     when "json"
